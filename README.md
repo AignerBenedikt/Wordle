@@ -12,3 +12,16 @@ Viel Spaß mit unserem WORDLE!
 Warum hat nur Benedikt Aigner gepushed?
 Wir hatten vor diesem Github 2 andere, unser erstes Github war ein Java Projekt und kein JavaFX. Auf dem war unser WORDLE Spiel auf der Konsole spielbar, aber wir wollten eben noch eine GUI miteinbauen.
 Der zweite Github hatte bei uns dann Probleme, da jeder einzelne Parts hatte, diese aber einfach in das Github einzufügen und zu kombinieren eine riesige Schwierigkeit bereitstellte und wir dann auf Plan B übergegangen sind und alle unsere Projektparts in eine Klasse zu vereinen. Da wir dann noch unter ein wenig Zeitdruck waren, da wir dachten das Zusammenfügen würde geschmeidiger ablaufen. Daraufhin haben wir uns auf eine Klasse geeinigt, die wir gemeinsam bearbeiten und haben dann unsere einzelnen Projektparts umgeschrieben das sie in die ausgewählte JavaFX Klasse reinpassen und auch funktionieren. Das haben wir alles dann per "Code with me" gemacht.
+
+So folgende To-Dos:
+Projekttagebuch
+You won/lost ! Nachricht
+Buchstaben Begrenzung wenn man händisch reinschreibt (echter Tastatur)
+Wordliste überarbeiten, NUR 5 BUCHSTABEN  WÖRTER
+Tastatur noch schöner machen (größere Buttons)
+Begrenzungen für das Wordle Fenster, also das sich das Programm nicht verschiebt wenn man die Fenstergröße anpasst. (ich hoffe ihr versteht was ich meine)
+Start Screen -> Spiel erklärung, White/Dark mode
+
+
+wenn noch Zeit ist:
+Enter Button überarbeiten
