@@ -7,3 +7,8 @@ Dann sollte das Programm ausführbar sein!
 Außerdem wird euch in der Konsole nach eurem ersten Versuch das Lösungswort angezeigt, das ist absichtlich um euch die Fehlersuche zu vereinfachen ;)
 
 Viel Spaß mit unserem WORDLE!
+
+
+Warum hat nur Benedikt Aigner gepushed?
+Wir hatten vor diesem Github 2 andere, unser erstes Github war ein Java Projekt und kein JavaFX. Auf dem war unser WORDLE Spiel auf der Konsole spielbar, aber wir wollten eben noch eine GUI miteinbauen.
+Der zweite Github hatte bei uns dann Probleme, da jeder einzelne Parts hatte, diese aber einfach in das Github einzufügen und zu kombinieren eine riesige Schwierigkeit bereitstellte und wir dann auf Plan B übergegangen sind und alle unsere Projektparts in eine Klasse zu vereinen. Da wir dann noch unter ein wenig Zeitdruck waren, da wir dachten das Zusammenfügen würde geschmeidiger ablaufen. Daraufhin haben wir uns auf eine Klasse geeinigt, die wir gemeinsam bearbeiten und haben dann unsere einzelnen Projektparts umgeschrieben das sie in die ausgewählte JavaFX Klasse reinpassen und auch funktionieren. Das haben wir alles dann per "Code with me" gemacht.
