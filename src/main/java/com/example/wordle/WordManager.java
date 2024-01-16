@@ -36,7 +36,7 @@ public class WordManager {
         List<String> filteredList = new LinkedList<>();
 
         try {
-            Path fl = Paths.get("C://Users//Benedikt//IdeaProjects//Wordle//src//main//java//com//example//wordle//wordlistG.txt"); //Pfad bestimmen
+            Path fl = Paths.get("C://Users//rayen//IdeaProjects//WordleIdea//src//main//java//com//example//wordle//wordlistG.txt"); //Pfad bestimmen
 
             List<String> list = Files.readAllLines(fl); // Das File in eine Liste aus Strings formen
 

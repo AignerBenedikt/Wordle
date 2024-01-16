@@ -1,11 +1,12 @@
 package com.example.wordle;
 
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -99,15 +100,15 @@ public class WordleController{
         guessInput.clear();
     }
     @FXML
-    protected void playAgain() throws IOException {
-        Stage stage = new Stage();
+    protected void playAgain(ActionEvent event) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(WordleApplication.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.setTitle("Wordle");
+        Stage stage =(Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();
     }
-    public void allguessButtonDisabled() {
+
+    public void disableAllGuessButtons() {
         Guess1.setDisable(true);
         Guess2.setDisable(true);
         Guess3.setDisable(true);
@@ -123,7 +124,7 @@ public class WordleController{
     protected void setBack() {
         try {
             guessInput.setText(guessInput.getText().substring(0, guessInput.getLength() - 1));
-        } catch (StringIndexOutOfBoundsException e) {
+        } catch (StringIndexOutOfBoundsException ignored) {
 
         }
     }
@@ -131,15 +132,26 @@ public class WordleController{
     @FXML
     protected void Letter(ActionEvent actionEvent) {
 
-        if (guessInput.getText().length()==5){
+        if (guessInput.getText().length()>=5){
             return;
         }
         Character text = actionEvent.getTarget().toString().charAt(10);
         guessInput.appendText(String.valueOf(text));
     }
+    public void realKeyboardInput(KeyEvent keyEvent) {
+
+        if (guessInput.getText().length()>5){
+            guessInput.setText(guessInput.getText().substring(0, guessInput.getLength() - 1));
+            guessInput.setEditable(false);
+
+        } else guessInput.setEditable(true);
+
+
+
+    }
     @FXML
     protected void checkGuess1() {
-        Guess1.setDisable(true);
+         // TODO setDisable nach der wordexists implementieren
         String guess = guessInput.getText().toUpperCase();
         Label[] row0 = {box00, box01, box02, box03, box04};
         System.out.println(word);
@@ -150,7 +162,7 @@ public class WordleController{
             Guess1.setDisable(false);
             System.out.println("FALSCH");
             return;
-        }
+        } else Guess1.setDisable(true);
 
         stringList.add(guess);
 
@@ -159,7 +171,7 @@ public class WordleController{
         Guess2.setDisable(false);
 
         if (word.equals(guess)){
-            allguessButtonDisabled();
+            disableAllGuessButtons();
             playAgain.setVisible(true);
             quit.setVisible(true);
             return;
@@ -168,9 +180,10 @@ public class WordleController{
         guessInput.clear();
     }
     @FXML
-    protected void checkGuess2() {
-        Guess2.setDisable(true);
+    protected void checkGuess2(ActionEvent event) {
         String guess = guessInput.getText().toUpperCase();
+        Label[] row1 = {box10, box11, box12, box13, box14};
+
         System.out.println(word);
 
         if (!wm.wordExist(guess)){
@@ -178,7 +191,8 @@ public class WordleController{
             Guess2.setDisable(false);
             System.out.println("FALSCH");
             return;
-        }
+        } else  Guess2.setDisable(true);
+
 
         if (stringList.contains(guess)){
             guessInput.clear();
@@ -188,15 +202,15 @@ public class WordleController{
             stringList.add(guess);
         }
 
-        Label[] row1 = {box10, box11, box12, box13, box14};
         int [] array=bm.comparisonOfLetters(word,guess);
         colorBoxes(array,guess,row1);
         Guess3.setDisable(false);
 
         if (word.equals(guess)){
-            allguessButtonDisabled();
+            disableAllGuessButtons();
             playAgain.setVisible(true);
             quit.setVisible(true);
+
             return;
         }
 
@@ -204,14 +218,17 @@ public class WordleController{
     }
     @FXML
     protected void checkGuess3() {
-        Guess3.setDisable(true);
+
         String guess = guessInput.getText().toUpperCase();
+        Label[] row2 = {box20, box21, box22, box23, box24};
+
         if (!wm.wordExist(guess)){
             guessInput.clear();
             Guess3.setDisable(false);
             System.out.println("FALSCH");
             return;
-        }
+        } else  Guess3.setDisable(true);
+
 
         if (stringList.contains(guess)){
             guessInput.clear();
@@ -223,13 +240,12 @@ public class WordleController{
 
 
 
-        Label[] row2 = {box20, box21, box22, box23, box24};
         int [] array=bm.comparisonOfLetters(word,guess);
         colorBoxes(array,guess,row2);
         Guess4.setDisable(false);
 
         if (word.equals(guess)){
-            allguessButtonDisabled();
+            disableAllGuessButtons();
             playAgain.setVisible(true);
             quit.setVisible(true);
             return;
@@ -239,15 +255,17 @@ public class WordleController{
     }
     @FXML
     protected void checkGuess4() {
-        Guess4.setDisable(true);
         String guess = guessInput.getText().toUpperCase();
+        Label[] row3 = {box30, box31, box32, box33, box34};
+
 
         if (!wm.wordExist(guess)){
             guessInput.clear();
             Guess4.setDisable(false);
             System.out.println("FALSCH");
             return;
-        }
+        } else   Guess4.setDisable(true);
+
 
         if (stringList.contains(guess)){
             guessInput.clear();
@@ -259,13 +277,12 @@ public class WordleController{
 
 
 
-        Label[] row3 = {box30, box31, box32, box33, box34};
         int [] array=bm.comparisonOfLetters(word,guess);
         colorBoxes(array,guess,row3);
         Guess5.setDisable(false);
 
         if (word.equals(guess)){
-            allguessButtonDisabled();
+            disableAllGuessButtons();
             playAgain.setVisible(true);
             quit.setVisible(true);
             return;
@@ -275,15 +292,16 @@ public class WordleController{
     }
     @FXML
     protected void checkGuess5() {
-        Guess5.setDisable(true);
         String guess = guessInput.getText().toUpperCase();
+        Label[] row4 = {box40, box41, box42, box43, box44};
 
         if (!wm.wordExist(guess)){
             guessInput.clear();
             Guess5.setDisable(false);
             System.out.println("FALSCH");
             return;
-        }
+        } else  Guess5.setDisable(true);
+
 
         if (stringList.contains(guess)){
             guessInput.clear();
@@ -295,13 +313,12 @@ public class WordleController{
         }
 
 
-        Label[] row4 = {box40, box41, box42, box43, box44};
         int [] array=bm.comparisonOfLetters(word,guess);
         colorBoxes(array,guess,row4);
         Guess6.setDisable(false);
 
         if (word.equals(guess)){
-            allguessButtonDisabled();
+            disableAllGuessButtons();
             playAgain.setVisible(true);
             quit.setVisible(true);
             return;
@@ -312,15 +329,16 @@ public class WordleController{
     @FXML
     protected void checkGuess6() {
 
-        Guess6.setDisable(true);
         String guess = guessInput.getText().toUpperCase();
+        Label[] row5 = {box50, box51, box52, box53, box54};
 
         if (!wm.wordExist(guess)){
             guessInput.clear();
             Guess6.setDisable(false);
             System.out.println("FALSCH");
             return;
-        }
+        } else  Guess6.setDisable(true);
+
 
         if (stringList.contains(guess)){
             guessInput.clear();
@@ -330,7 +348,6 @@ public class WordleController{
             stringList.add(guess);
         }
 
-        Label[] row5 = {box50, box51, box52, box53, box54};
         int [] array=bm.comparisonOfLetters(word,guess);
         colorBoxes(array,guess,row5);
         playAgain.setVisible(true);
@@ -411,4 +428,6 @@ public class WordleController{
             }
         }
     }
+
+
 }
