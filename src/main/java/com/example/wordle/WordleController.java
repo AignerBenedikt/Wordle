@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
@@ -140,12 +141,29 @@ public class WordleController{
     }
     public void realKeyboardInput(KeyEvent keyEvent) {
 
+
         if (guessInput.getText().length()>5){
             guessInput.setText(guessInput.getText().substring(0, guessInput.getLength() - 1));
             guessInput.setEditable(false);
 
         } else guessInput.setEditable(true);
+        if (keyEvent.getCode().equals(KeyCode.ENTER)){
+            if (!Guess1.isDisable()){
+                checkGuess1();
+            } else if (!Guess2.isDisable()) {
+                checkGuess2();
 
+            } else if (!Guess3.isDisable()) {
+                checkGuess3();
+
+            } else if (!Guess4.isDisable()) {
+                checkGuess4();
+
+            } else if (!Guess5.isDisable()) {
+                checkGuess5();
+
+            }
+        }
 
 
     }
@@ -180,7 +198,7 @@ public class WordleController{
         guessInput.clear();
     }
     @FXML
-    protected void checkGuess2(ActionEvent event) {
+    protected void checkGuess2() {
         String guess = guessInput.getText().toUpperCase();
         Label[] row1 = {box10, box11, box12, box13, box14};
 
