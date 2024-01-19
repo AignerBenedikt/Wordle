@@ -8,6 +8,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -18,6 +20,8 @@ import static javafx.application.Application.launch;
 //https://www.youtube.com/watch?v=B4t0Y40U4HI
 
 public class WordleController{
+    public javafx.scene.layout.VBox VBox;
+    public Label Won;
     WordManager wm = new WordManager();
     BuchstabenManager bm = new BuchstabenManager();
     String word = "";
@@ -27,6 +31,7 @@ public class WordleController{
         wm.generateWordList(5);
         this.word = wm.SolutionWord();
     }
+
 
     public Button Guess1;
     public Button Guess2;
@@ -142,11 +147,16 @@ public class WordleController{
     public void realKeyboardInput(KeyEvent keyEvent) {
 
 
+
         if (guessInput.getText().length()>5){
             guessInput.setText(guessInput.getText().substring(0, guessInput.getLength() - 1));
             guessInput.setEditable(false);
 
         } else guessInput.setEditable(true);
+        if (keyEvent.getCode().isLetterKey()){
+
+        }
+        
         if (keyEvent.getCode().equals(KeyCode.ENTER)){
             if (!Guess1.isDisable()){
                 checkGuess1();
@@ -162,6 +172,8 @@ public class WordleController{
             } else if (!Guess5.isDisable()) {
                 checkGuess5();
 
+            } else {
+                checkGuess6();
             }
         }
 
@@ -201,6 +213,7 @@ public class WordleController{
     protected void checkGuess2() {
         String guess = guessInput.getText().toUpperCase();
         Label[] row1 = {box10, box11, box12, box13, box14};
+
 
         System.out.println(word);
 

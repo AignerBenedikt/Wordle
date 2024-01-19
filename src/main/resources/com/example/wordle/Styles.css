@@ -1,0 +1,22 @@
+
+root {
+
+    --border-radius: 5;
+
+}
+
+
+.button {
+    -fx-background-color: white;
+    -fx-text-fill: black;
+    -fx-min-height: 50;
+    -fx-min-width: 50;
+    -fx-border-color: #998b8b;
+    -fx-border-radius: 5;
+}
+
+.label {
+    -fx-border-radius: 5;
+    -fx-border-color: #998b8b;
+
+}
