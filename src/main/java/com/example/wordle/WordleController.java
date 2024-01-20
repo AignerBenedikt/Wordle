@@ -104,8 +104,10 @@ public class WordleController {
         FXMLLoader fxmlLoader = new FXMLLoader(WordleApplication.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene.getStylesheets().add(WordleApplication.class.getResource("Styles.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
+
     }
 
     @FXML
@@ -138,13 +140,11 @@ public class WordleController {
 
     @FXML
     protected void Letter(ActionEvent actionEvent) {
-        //HBox1.getChildren().add(box10);
-        // Label label = (Label) HBox1.getChildren().get(0);
+
         if (guessInput.getText().length() >= 5) {
             return;
         }
         Character text = actionEvent.getTarget().toString().charAt(10);
-        //    label.setText(String.valueOf(text));
 
         guessInput.appendText(String.valueOf(text));
     }
@@ -289,119 +289,27 @@ public class WordleController {
     @FXML
     protected void checkGuess2() {
         checkGuess(2);
-/*
-        String guess = guessInput.getText().toUpperCase();
-        Label[] row1 = {box10, box11, box12, box13, box14};
-
-
-        System.out.println(word);
-
-        if (!wm.wordExist(guess)) {
-
-            wordDoesntExist(Guess2);
-
-            return;
-
-        } else Guess2.setDisable(true);
-
-        handleGuess(guess, row1, Guess2, Guess3);
-
- */
     }
 
     @FXML
     protected void checkGuess3() {
         checkGuess(3);
-/*
-        String guess = guessInput.getText().toUpperCase();
-        Label[] row2 = {box20, box21, box22, box23, box24};
-
-        if (!wm.wordExist(guess)) {
-
-            wordDoesntExist(Guess3);
-
-            return;
-        } else Guess3.setDisable(true);
-
-
-        handleGuess(guess, row2, Guess3, Guess4);
-
- */
     }
-
-
 
     @FXML
     protected void checkGuess4() {
         checkGuess(4);
-/*
-        String guess = guessInput.getText().toUpperCase();
-        Label[] row3 = {box30, box31, box32, box33, box34};
-
-
-        if (!wm.wordExist(guess)) {
-
-            wordDoesntExist(Guess4);
-
-            return;
-        } else Guess4.setDisable(true);
-
-
-        handleGuess(guess, row3, Guess4, Guess5);
-
- */
     }
 
     @FXML
     protected void checkGuess5() {
         checkGuess(5);
-/*
-        String guess = guessInput.getText().toUpperCase();
-        Label[] row4 = {box40, box41, box42, box43, box44};
-
-        if (!wm.wordExist(guess)) {
-
-            wordDoesntExist(Guess5);
-
-            return;
-        } else Guess5.setDisable(true);
-
-
-        handleGuess(guess, row4, Guess5, Guess6);
-        Guess6.setDisable(false);
-
- */
 
     }
 
     @FXML
     protected void checkGuess6() {
         checkGuess(6);
-/*
-        String guess = guessInput.getText().toUpperCase();
-        Label[] row5 = {box50, box51, box52, box53, box54};
-
-        if (!wm.wordExist(guess)) {
-
-            wordDoesntExist(Guess6);
-
-            return;
-        } else Guess6.setDisable(true);
-
-        if (stringList.contains(guess)) {
-            wordAlreadyUsed(Guess6);
-            return;
-        } else stringList.add(guess);
-
-        array = bm.comparisonOfLetters(word, guess);
-        colorBoxes(array, guess, row5, Guess6);
-
-        playAgain.setVisible(true);
-        quit.setVisible(true);
-
-        guessInput.clear();
-        
- */
     }
 
     public void colorBoxes(int[] anzeigeArray, String eingabe, Label[] row, Button button) {
@@ -514,6 +422,7 @@ public class WordleController {
             disableAllGuessButtons();
             playAgain.setVisible(true);
             quit.setVisible(true);
+            guessInput.setDisable(true);
         }
     }
 
