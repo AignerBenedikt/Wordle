@@ -1,14 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Point3D?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox fx:id="Quit"  alignment="CENTER" prefHeight="877.0" prefWidth="622.0" spacing="20.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.wordle.WordleController">
+<VBox fx:id="Quit" alignment="CENTER" prefHeight="877.0" prefWidth="622.0" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.wordle.WordleController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
+   <HBox fillHeight="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="51.0" prefWidth="437.0" snapToPixel="false">
+      <rotationAxis>
+         <Point3D />
+      </rotationAxis>
+      <children>
+         <Button fx:id="ChangeSreenButton" layoutX="200.0" layoutY="300.0" mnemonicParsing="false" onAction="#changeToResultState" text="Change to Last Screen" opacity="0" />
+      </children>
+   </HBox>
    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
       <children>
          <Label fx:id="box00" alignment="CENTER" prefHeight="70.0" prefWidth="70.0" style="-fx-border-color: black; -fx-background-color: white;" textAlignment="CENTER">
@@ -293,16 +305,16 @@
    </HBox>
    <HBox alignment="CENTER">
       <children>
-         <Button fx:id="playAgain" onAction="#playAgain" visible="false" mnemonicParsing="false" text="Play Again">
+         <Button fx:id="playAgain" mnemonicParsing="false" onAction="#playAgain" text="Play Again" visible="false">
             <HBox.margin>
                <Insets left="-40.0" />
             </HBox.margin></Button>
-         <TextField fx:id="guessInput" alignment="CENTER" onKeyPressed="#realKeyboardInput" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="28.0" prefWidth="167.0">
+         <TextField fx:id="guessInput" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" onKeyPressed="#realKeyboardInput" prefHeight="28.0" prefWidth="167.0">
             <HBox.margin>
                <Insets left="20.0" right="20.0" />
             </HBox.margin>
          </TextField>
-         <Button fx:id="quit" onAction="#quit" visible="false" mnemonicParsing="false" text="Quit" />
+         <Button fx:id="quit" mnemonicParsing="false" onAction="#quit" text="Quit" visible="false" />
       </children>
    </HBox>
    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">

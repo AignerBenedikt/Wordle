@@ -23,6 +23,8 @@ public class WordleController{
     String word = "";
     List<String> stringList = new ArrayList<>();
 
+    boolean gameWinState = false;
+
     public WordleController() {
         wm.generateWordList(5);
         this.word = wm.SolutionWord();
@@ -102,11 +104,27 @@ public class WordleController{
     }
     @FXML
     protected void playAgain(ActionEvent event) throws IOException {
+        /*
+        // NEU = "Action Event" erhält das ursprüngliche Fenster, auf dem die Aktion ausgelöst wird
+        "event.getSource()§ gibt das ursprüngliche Objekt zurück, auf dem die Aktion stattgefunden hat.
+        dieses Event ist ein "Node" =  getScene().getWindow() wird verwendet, um das Window-Objekt (die Stage) zu erhalten.
+         */
         FXMLLoader fxmlLoader = new FXMLLoader(WordleApplication.class.getResource("hello-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage =(Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();
+
+        /*
+        // ALT = ein neues Stage-Objekt wird erstellt ->  eine neue Instanz der Stage-Klasse erstellt, und das Fenster wird darauf aufgebaut.
+        protected void playAgain() throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader(WordleApplication.class.getResource("hello-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("Wordle");
+        stage.setScene(scene);
+        stage.show();
+         */
     }
 
     public void disableAllGuessButtons() {
@@ -140,7 +158,6 @@ public class WordleController{
         guessInput.appendText(String.valueOf(text));
     }
     public void realKeyboardInput(KeyEvent keyEvent) {
-
 
         if (guessInput.getText().length()>5){
             guessInput.setText(guessInput.getText().substring(0, guessInput.getLength() - 1));
@@ -226,6 +243,16 @@ public class WordleController{
 
         if (word.equals(guess)){
             disableAllGuessButtons();
+            gameWinState = true;
+
+            ActionEvent simulatedEvent = new ActionEvent(ChangeSreenButton, ChangeSreenButton);
+            try {
+                // Rufe changeToResultState mit dem simulierten Event auf
+                changeToResultState(simulatedEvent);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
             playAgain.setVisible(true);
             quit.setVisible(true);
 
@@ -339,6 +366,7 @@ public class WordleController{
             disableAllGuessButtons();
             playAgain.setVisible(true);
             quit.setVisible(true);
+
             return;
         }
 
@@ -368,10 +396,15 @@ public class WordleController{
 
         int [] array=bm.comparisonOfLetters(word,guess);
         colorBoxes(array,guess,row5);
+        if (word.equals(guess)){
+        gameWinState = true;
+        }
+        // to du Button fire !
         playAgain.setVisible(true);
         quit.setVisible(true);
         guessInput.clear();
     }
+
     public void colorBoxes (int[]anzeigeArray,String eingabe, Label[] row) {
         //System.out.println(Arrays.toString(anzeigeArray));
         Map<String, Button>buttonMap  = new HashMap<>() {{
@@ -421,7 +454,6 @@ public class WordleController{
 
 
 
-
             } else {
 
                 if (anzeigeArray[i] == 1) {
@@ -447,5 +479,26 @@ public class WordleController{
         }
     }
 
+    @FXML
+    private Button ChangeSreenButton;
+    @FXML
+    protected void changeToResultState(ActionEvent event) throws IOException {
+
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("LastScreen.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+
+        ControllerResultState resultState = fxmlLoader.getController();
+
+        // Setze den Text der Labels direkt
+        if (gameWinState == true){
+
+            resultState.setResultText("CONGRATULATION! YOU WON!");
+        } else {
+            resultState.setResultText("SORRY! YOU LOST");}
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
 
 }
