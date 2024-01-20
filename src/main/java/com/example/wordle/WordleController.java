@@ -18,10 +18,12 @@ import static javafx.application.Application.launch;
 //https://www.youtube.com/watch?v=B4t0Y40U4HI
 
 public class WordleController{
+    public Label timerLabel;
     WordManager wm = new WordManager();
     BuchstabenManager bm = new BuchstabenManager();
     String word = "";
     List<String> stringList = new ArrayList<>();
+
 
     boolean gameWinState = false;
 

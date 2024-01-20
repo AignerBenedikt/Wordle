@@ -18,7 +18,12 @@
          <Point3D />
       </rotationAxis>
       <children>
-         <Button fx:id="ChangeSreenButton" layoutX="200.0" layoutY="300.0" mnemonicParsing="false" onAction="#changeToResultState" text="Change to Last Screen" opacity="0" />
+         <Button fx:id="ChangeSreenButton" layoutX="200.0" layoutY="300.0" mnemonicParsing="false" onAction="#changeToResultState" opacity="0" text="Change to Last Screen" />
+         <Label fx:id="timerLabel" alignment="CENTER" contentDisplay="TOP" pickOnBounds="false" prefHeight="43.0" prefWidth="165.0" text="TIMER  05:00">
+            <font>
+               <Font name="SansSerif Bold" size="23.0" />
+            </font>
+         </Label>
       </children>
    </HBox>
    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
