@@ -8,7 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -18,7 +17,7 @@ import java.util.*;
 //https://www.youtube.com/watch?v=B4t0Y40U4HI
 
 public class WordleController {
-   
+
     WordManager wm = new WordManager();
     BuchstabenManager bm = new BuchstabenManager();
     String word = "";
