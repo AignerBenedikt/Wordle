@@ -8,6 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -18,6 +19,9 @@ import java.util.*;
 
 public class WordleController {
 
+    public HBox LetterRow3;
+    public HBox LetterRow2;
+    public HBox LetterRow1;
     WordManager wm = new WordManager();
     BuchstabenManager bm = new BuchstabenManager();
     String word = "";
@@ -122,6 +126,12 @@ public class WordleController {
         Guess4.setDisable(true);
         Guess5.setDisable(true);
         Guess6.setDisable(true);
+    }
+    public void disableAllLetter() {
+        LetterRow1.setDisable(true);
+        LetterRow2.setDisable(true);
+        LetterRow3.setDisable(true);
+
     }
 
     @FXML
@@ -420,6 +430,7 @@ public class WordleController {
     public void youWon(boolean b) {
         if (b) {
             disableAllGuessButtons();
+            disableAllLetter();
             playAgain.setVisible(true);
             quit.setVisible(true);
             guessInput.setDisable(true);
@@ -437,6 +448,9 @@ public class WordleController {
 
         array = bm.comparisonOfLetters(word, guess);
         colorBoxes(array, guess, row2, nextButton);
+        if (nextButton.getText().equals("Guess 6")){
+            nextButton.setDisable(false);
+        }
 
         youWon(word.equals(guess));
 
