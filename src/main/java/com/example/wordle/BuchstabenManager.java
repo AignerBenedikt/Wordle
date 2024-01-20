@@ -1,7 +1,6 @@
 package com.example.wordle;
 
-import java.util.Arrays;
-import java.util.IllegalFormatCodePointException;
+
 
 
 public class BuchstabenManager {
@@ -13,13 +12,6 @@ public class BuchstabenManager {
         let = new StringBuilder();
         int[] anzeigeArray = new int[loesung.length()];                 // 0 = Zeichen falsch; 1 = Zeichen gelb (vorhanden aber falsche Stelle), 2 = Zeichen richtig grün
 
-
-        if (eingabe.equalsIgnoreCase(loesung)) {
-
-            anzeigeArray = new int[]{2, 2, 2, 2, 2};
-
-
-        } else {
 
             for (int i = 0; i < loesung.length(); i++) {
 
@@ -39,7 +31,7 @@ public class BuchstabenManager {
                     }
                 }
             }
-        }
+
 
         for (int m = 0; m < loesung.length(); m++) {
 
