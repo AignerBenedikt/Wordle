@@ -22,15 +22,25 @@ public class WordleController {
     public HBox LetterRow3;
     public HBox LetterRow2;
     public HBox LetterRow1;
+    public Label timerLabel2;
+    KeyEvent event;
+    TimeManager tm = new TimeManager();
     WordManager wm = new WordManager();
     BuchstabenManager bm = new BuchstabenManager();
     String word = "";
+    boolean initialize = true;
+    int counter;
     int[] array;
+   // int counter = 6;
     List<String> stringList = new ArrayList<>();
 
     public WordleController() {
         wm.generateWordList(5);
         this.word = wm.SolutionWord();
+        this.counter = 1;
+        tm.setOnTimeTick(() -> {
+            timerLabel2.setText(tm.getFormattedTime());
+        });
     }
 
 
@@ -102,36 +112,9 @@ public class WordleController {
     public Label box53 = new Label();
     public Label box54 = new Label();
 
-
-    @FXML
-    protected void playAgain(ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(WordleApplication.class.getResource("hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene.getStylesheets().add(WordleApplication.class.getResource("Styles.css").toExternalForm());
-        stage.setScene(scene);
-        stage.show();
-
-    }
-
     @FXML
     protected void quit() {
         System.exit(0);
-    }
-
-    public void disableAllGuessButtons() {
-        Guess1.setDisable(true);
-        Guess2.setDisable(true);
-        Guess3.setDisable(true);
-        Guess4.setDisable(true);
-        Guess5.setDisable(true);
-        Guess6.setDisable(true);
-    }
-    public void disableAllLetter() {
-        LetterRow1.setDisable(true);
-        LetterRow2.setDisable(true);
-        LetterRow3.setDisable(true);
-
     }
 
     @FXML
@@ -161,6 +144,7 @@ public class WordleController {
 
     public void realKeyboardInput(KeyEvent keyEvent) {
 
+        setEvent(keyEvent);
         if (guessInput.getText().length() > 5) {
             guessInput.setText(guessInput.getText().substring(0, guessInput.getLength() - 1));
             guessInput.setEditable(false);
@@ -174,31 +158,12 @@ public class WordleController {
  */
 
         if (keyEvent.getCode().equals(KeyCode.ENTER)) {
-
-            if (!Guess1.isDisable()) {
-              //  checkGuess1();
-                checkGuess(1);
-            } else if (!Guess2.isDisable()) {
-               // checkGuess2();
-                checkGuess(2);
-
-            } else if (!Guess3.isDisable()) {
-              //  checkGuess3();
-                checkGuess(3);
-
-            } else if (!Guess4.isDisable()) {
-               // checkGuess4();
-                checkGuess(4);
-
-            } else if (!Guess5.isDisable()) {
-               // checkGuess5();
-                checkGuess(5);
-
-            } else {
-              //  checkGuess6();
-                checkGuess(6);
-
+            if (initialize){
+                tm.startTimer();
+                initialize = false;
             }
+            checkGuess(counter);
+            counter++;
         }
 
         // checkguess(int i) -> switch int i case 1: checkguess1, case 2: checkguess2 ,....
@@ -208,44 +173,31 @@ public class WordleController {
     public void checkGuess(int i) {
         String guess = guessInput.getText().toUpperCase();
         Label[] row = new Label[0];
-        Button button = null;
-        Button nextButton = null;
+
 
         switch (i) {
             case 1:
                 row = new Label[]{box00, box01, box02, box03, box04};
-                button = Guess1;
-                nextButton = Guess2;
                 break;
 
             case 2:
                 row = new Label[]{box10, box11, box12, box13, box14};
-                button = Guess2;
-                nextButton = Guess3;
                 break;
 
             case 3:
                 row = new Label[]{box20, box21, box22, box23, box24};
-                button = Guess3;
-                nextButton = Guess4;
                 break;
 
             case 4:
                 row = new Label[]{box30, box31, box32, box33, box34};
-                button = Guess4;
-                nextButton = Guess5;
                 break;
 
             case 5:
                 row = new Label[]{box40, box41, box42, box43, box44};
-                button = Guess5;
-                nextButton = Guess6;
                 break;
 
             case 6:
                 row = new Label[]{box50, box51, box52, box53, box54};
-                button = Guess6;
-                nextButton = Guess6;
                 break;
         }
 
@@ -254,79 +206,30 @@ public class WordleController {
 
         if (!wm.wordExist(guess)) {
 
-            wordDoesntExist(button);
+            wordDoesntExist();
+            counter--;
 
             return;
 
-        } else button.setDisable(true);
+        }
 
 
-        handleGuess(guess,row,button,nextButton);
+        handleGuess(guess,row);
 
-    }
-    @FXML
-    protected void checkGuess1() {
-        //eine große checkGuess Mwthode wo die funktionialität gliech ist aber die variablen(Buttons und labels) durch eine if abfrage verändern
-        checkGuess(1);
-/*
-        String guess = guessInput.getText().toUpperCase();
-        Label[] row0 = {box00, box01, box02, box03, box04};
-        System.out.println(word);
+        if (i==6){
+            try {
 
+                youLost();
 
-        if (!wm.wordExist(guess)) {
-
-            wordDoesntExist(Guess1);
-
-            return;
-
-        } else Guess1.setDisable(true);
-
-        stringList.add(guess);
-
-        array = bm.comparisonOfLetters(word, guess);
-
-        colorBoxes(array, guess, row0, Guess2);
-
-        youWon(word.equals(guess));
-
-        //HBox1.setDisable(true);
-        guessInput.clear();
-
- */
-    }
-
-    @FXML
-    protected void checkGuess2() {
-        checkGuess(2);
-    }
-
-    @FXML
-    protected void checkGuess3() {
-        checkGuess(3);
-    }
-
-    @FXML
-    protected void checkGuess4() {
-        checkGuess(4);
-    }
-
-    @FXML
-    protected void checkGuess5() {
-        checkGuess(5);
+            } catch (NullPointerException ignored) {}
+        }
 
     }
 
-    @FXML
-    protected void checkGuess6() {
-        checkGuess(6);
-    }
 
-    public void colorBoxes(int[] anzeigeArray, String eingabe, Label[] row, Button button) {
+    public void colorBoxes(int[] anzeigeArray, String eingabe, Label[] row) {
         //System.out.println(Arrays.toString(anzeigeArray));
-        if (button.getText().equals("Guess 6")) {
-            button.setDisable(true);
-        } else button.setDisable(false);
+
         Map<String, Button> buttonMap = new HashMap<>() {{
             put("A", A);
             put("B", B);
@@ -399,10 +302,9 @@ public class WordleController {
         }
     }
 
-    public void wordDoesntExist(Button button) {
+    public void wordDoesntExist() {
 
         guessInput.clear();
-        button.setDisable(false);
 
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Word doesnt Exitst");
@@ -412,10 +314,9 @@ public class WordleController {
         alert.showAndWait();
     }
 
-    public void wordAlreadyUsed(Button button) {
+    public void wordAlreadyUsed() {
 
         guessInput.clear();
-        button.setDisable(false);
 
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Word already was written");
@@ -428,35 +329,86 @@ public class WordleController {
     }
 
     public void youWon(boolean b) {
+
         if (b) {
+            /*
             disableAllGuessButtons();
             disableAllLetter();
             playAgain.setVisible(true);
             quit.setVisible(true);
             guessInput.setDisable(true);
+            */
+            try {
+                tm.stopTimer();
+                timerLabel2.setText(tm.getFormattedTime());
+                changeToResultState(getEvent(),b);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
         }
     }
+    public void youLost() {
 
-    public void handleGuess(String guess, Label[] row2, Button mainButton, Button nextButton) {
+            try {
+                tm.stopTimer();
+                timerLabel2.setText(tm.getFormattedTime());
+                changeToResultState(getEvent(),false);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
 
 
-        if (stringList.contains(guess)){
-            wordAlreadyUsed(mainButton);
+    }
+
+    public void handleGuess(String guess, Label[] row2) {
+
+
+        if (stringList.contains(guess)) {
+            wordAlreadyUsed();
+            counter--;
             return;
         } else stringList.add(guess);
 
 
         array = bm.comparisonOfLetters(word, guess);
-        colorBoxes(array, guess, row2, nextButton);
-        if (nextButton.getText().equals("Guess 6")){
-            nextButton.setDisable(false);
-        }
+        colorBoxes(array, guess, row2);
+
 
         youWon(word.equals(guess));
 
 
         guessInput.clear();
+
     }
 
+    @FXML
+    protected void changeToResultState(KeyEvent event, boolean b) throws IOException {
 
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("LastScreen.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+
+        ControllerResultState resultState = fxmlLoader.getController();
+
+        // Setze den Text der Labels direkt
+        if (b){
+            resultState.setResultText("CONGRATULATION! YOU WON!");
+        } else {
+            resultState.setResultText("SORRY! YOU LOST");}
+
+       // resultState.updateTimerLabel(tm.getFormattedTime());
+        resultState.updateTimerLabel(tm.getFormattedTime());
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public KeyEvent getEvent() {
+        return event;
+    }
+
+    public void setEvent(KeyEvent event) {
+        this.event = event;
+    }
 }

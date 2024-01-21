@@ -9,6 +9,15 @@
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
+   <HBox fillHeight="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="51.0" prefWidth="437.0" snapToPixel="false">
+      <rotationAxis>
+         <Point3D />
+      </rotationAxis>
+      <children>
+         <Label fx:id="timerLabel2" alignment="CENTER" contentDisplay="TOP" pickOnBounds="false" prefHeight="43.0" prefWidth="165.0">
+         </Label>
+      </children>
+   </HBox>
    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
       <children>
          <Label fx:id="box00" alignment="CENTER" prefHeight="70.0" prefWidth="70.0" style="-fx-border-color: black; -fx-background-color: white;" textAlignment="CENTER">
@@ -293,7 +302,7 @@
    </HBox>
    <HBox alignment="CENTER">
       <children>
-         <Button fx:id="playAgain" mnemonicParsing="false" onAction="#playAgain" text="Play Again" visible="false">
+         <Button fx:id="playAgain" mnemonicParsing="false" text="Play Again" visible="false">
             <HBox.margin>
                <Insets left="-40.0" />
             </HBox.margin></Button>
@@ -304,37 +313,6 @@
          </TextField>
          <Button fx:id="quit" mnemonicParsing="false" onAction="#quit" text="Quit" visible="false" />
       </children>
-   </HBox>
-   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-      <children>
-         <Button fx:id="Guess1" onAction="#checkGuess1" text=" Guess 1">
-            <HBox.margin>
-               <Insets left="2.0" right="2.0" />
-            </HBox.margin></Button>
-         <Button fx:id="Guess2" disable="true" layoutX="10.0" layoutY="10.0" onAction="#checkGuess2" text="Guess 2">
-            <HBox.margin>
-               <Insets left="2.0" right="2.0" />
-            </HBox.margin></Button>
-         <Button fx:id="Guess3" disable="true" layoutX="59.0" layoutY="10.0" onAction="#checkGuess3" text="Guess 3">
-            <HBox.margin>
-               <Insets left="2.0" right="2.0" />
-            </HBox.margin></Button>
-         <Button fx:id="Guess4" disable="true" layoutX="108.0" layoutY="10.0" onAction="#checkGuess4" text="Guess 4">
-            <HBox.margin>
-               <Insets left="2.0" right="2.0" />
-            </HBox.margin></Button>
-         <Button fx:id="Guess5" disable="true" layoutX="157.0" layoutY="10.0" onAction="#checkGuess5" text="Guess 5">
-            <HBox.margin>
-               <Insets left="2.0" right="2.0" />
-            </HBox.margin></Button>
-         <Button fx:id="Guess6" disable="true" layoutX="206.0" layoutY="10.0" onAction="#checkGuess6" text="Guess 6">
-            <HBox.margin>
-               <Insets left="2.0" right="2.0" />
-            </HBox.margin></Button>
-      </children>
-      <VBox.margin>
-         <Insets bottom="-30.0" top="-30.0" />
-      </VBox.margin>
    </HBox>
    <HBox fx:id="LetterRow1" alignment="CENTER" prefHeight="30.0" prefWidth="200.0">
       <children>
