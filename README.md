@@ -15,20 +15,22 @@ Der zweite Github hatte bei uns dann Probleme, da jeder einzelne Parts hatte, di
 
 So folgende To-Dos:
 
-Projekttagebuch
+Projekttagebuch WORK IN PROGRESS
 
-You won/lost ! Nachricht
+You won/lost ! Nachricht CHECK
 
-Buchstaben Begrenzung wenn man händisch reinschreibt (echter Tastatur)
+Buchstaben Begrenzung wenn man händisch reinschreibt (echter Tastatur) CHECK
 
-Wordliste überarbeiten, NUR 5 BUCHSTABEN  WÖRTER
+Wordliste überarbeiten, NUR 5 BUCHSTABEN  WÖRTER   CHECK
 
-Tastatur noch schöner machen (größere Buttons)
+Tastatur noch schöner machen (größere Buttons) CHECK
 
-Begrenzungen für das Wordle Fenster, also das sich das Programm nicht verschiebt wenn man die Fenstergröße anpasst. (ich hoffe ihr versteht was ich meine)
+Begrenzungen für das Wordle Fenster, also das sich das Programm nicht verschiebt wenn man die Fenstergröße anpasst. (ich hoffe ihr versteht was ich meine)  CHECK
 
-Start Screen -> Spiel erklärung, White/Dark mode
+Start Screen -> Spiel erklärung, White/Dark mode WORK IN PROGRESS
+
 
 
 wenn noch Zeit ist:
-Enter Button überarbeiten
+Enter Button überarbeiten CHECK
+Kommentare zu FXML Dateien WORK IN PROGRESS

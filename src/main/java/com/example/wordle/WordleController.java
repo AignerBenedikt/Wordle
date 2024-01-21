@@ -145,17 +145,12 @@ public class WordleController {
     public void realKeyboardInput(KeyEvent keyEvent) {
 
         setEvent(keyEvent);
-        if (guessInput.getText().length() > 5) {
-            guessInput.setText(guessInput.getText().substring(0, guessInput.getLength() - 1));
-            guessInput.setEditable(false);
-
-        } else guessInput.setEditable(true);
-/*
-        if (keyEvent.getCode().isLetterKey()){
+        if (guessInput.getText().length() == 5 && !keyEvent.getCode().equals(KeyCode.ENTER)) {
+            guessInput.setText(guessInput.getText().substring(0, guessInput.getLength()-1));
+            ((TextField) event.getSource()).positionCaret(guessInput.getLength());
 
         }
 
- */
 
         if (keyEvent.getCode().equals(KeyCode.ENTER)) {
             if (initialize){
@@ -169,37 +164,7 @@ public class WordleController {
         // checkguess(int i) -> switch int i case 1: checkguess1, case 2: checkguess2 ,....
 
     }
-    public void handleKeyReleased(KeyEvent event) {
-        // nachdem die event.consume() Methode nicht funktioniert
-        // hat uns mit folgendem Problem Chat GPT geholfen !
 
-        // Überprüfe, ob die gedrückte Taste ein Buchstabe ist
-        if (event.getCode().isLetterKey()) {
-            // Hole den aktuelle Text aus dem TextField
-            String currentText = ((TextField) event.getSource()).getText();
-
-            // Füge den umgewandelten Buchstaben am Ende des Texts hinzu
-            String updatedText = currentText + event.getText().toUpperCase();
-
-            // Setze den aktualisierten Text ins TextField
-            ((TextField) event.getSource()).setText(updatedText);
-
-            // Setze den Cursor an das Ende des Textfelds
-            ((TextField) event.getSource()).positionCaret(updatedText.length());
-
-            // Lösche den ursprünglichen Kleinbuchstaben
-            if (currentText.length() > 0) {
-                // Falls der Text nicht leer ist, lösche den letzten Buchstaben
-                updatedText = currentText.substring(0, currentText.length() - 1) + event.getText().toUpperCase();
-            }
-
-            // Setze den aktualisierten Text ins TextField
-            ((TextField) event.getSource()).setText(updatedText);
-
-            // Setze den Cursor an das Ende des Textfelds
-            ((TextField) event.getSource()).positionCaret(updatedText.length());
-        }
-    }
     public void checkGuess(int i) {
         String guess = guessInput.getText().toUpperCase();
         Label[] row = new Label[0];
@@ -246,7 +211,7 @@ public class WordleController {
 
         handleGuess(guess,row);
 
-        if (i==6){
+        if (i==6 && counter == 6){
             try {
 
                 youLost();
@@ -347,7 +312,6 @@ public class WordleController {
     public void wordAlreadyUsed() {
 
         guessInput.clear();
-
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Word already was written");
         alert.setHeaderText(null);
@@ -430,6 +394,7 @@ public class WordleController {
         resultState.updateTimerLabel(tm.getFormattedTime());
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene.getStylesheets().add(WordleApplication.class.getResource("Styles.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
     }
