@@ -170,6 +170,9 @@ public class WordleController {
 
     }
     public void handleKeyReleased(KeyEvent event) {
+        // nachdem die event.consume() Methode nicht funktioniert
+        // hat uns mit folgendem Problem Chat GPT geholfen !
+
         // Überprüfe, ob die gedrückte Taste ein Buchstabe ist
         if (event.getCode().isLetterKey()) {
             // Hole den aktuelle Text aus dem TextField
