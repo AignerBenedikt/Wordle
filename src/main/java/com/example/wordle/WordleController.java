@@ -18,20 +18,23 @@ import static javafx.application.Application.launch;
 //https://www.youtube.com/watch?v=B4t0Y40U4HI
 
 public class WordleController{
-    public Label timerLabel;
+
+    TimeManager tm = new TimeManager();
     WordManager wm = new WordManager();
     BuchstabenManager bm = new BuchstabenManager();
     String word = "";
     List<String> stringList = new ArrayList<>();
-
-
     boolean gameWinState = false;
+    @FXML
+    public Label timerLabel2;
 
     public WordleController() {
         wm.generateWordList(5);
         this.word = wm.SolutionWord();
+        tm.setOnTimeTick(() -> {
+            timerLabel2.setText(tm.getFormattedTime());
+        });
     }
-
     public Button Guess1;
     public Button Guess2;
     public Button Guess3;
@@ -117,6 +120,9 @@ public class WordleController{
         stage.setScene(scene);
         stage.show();
 
+        tm.stopTimer();
+        timerLabel2.setText(tm.getFormattedTime());
+
         /*
         // ALT = ein neues Stage-Objekt wird erstellt ->  eine neue Instanz der Stage-Klasse erstellt, und das Fenster wird darauf aufgebaut.
         protected void playAgain() throws IOException {
@@ -191,12 +197,14 @@ public class WordleController{
          // TODO setDisable nach der wordexists implementieren
         String guess = guessInput.getText().toUpperCase();
         Label[] row0 = {box00, box01, box02, box03, box04};
+
+        tm.startTimer();
+
         System.out.println(word);
-
-
         if (!wm.wordExist(guess)){
             guessInput.clear();
             Guess1.setDisable(false);
+
             System.out.println("FALSCH");
             return;
         } else Guess1.setDisable(true);
@@ -209,6 +217,12 @@ public class WordleController{
 
         if (word.equals(guess)){
             disableAllGuessButtons();
+
+            tm.stopTimer();
+            timerLabel2.setText(tm.getFormattedTime());
+
+            gameWinState = true;
+
             playAgain.setVisible(true);
             quit.setVisible(true);
             return;
@@ -245,7 +259,9 @@ public class WordleController{
 
         if (word.equals(guess)){
             disableAllGuessButtons();
+
             gameWinState = true;
+            tm.stopTimer();
 
             ActionEvent simulatedEvent = new ActionEvent(ChangeSreenButton, ChangeSreenButton);
             try {
@@ -497,6 +513,8 @@ public class WordleController{
             resultState.setResultText("CONGRATULATION! YOU WON!");
         } else {
             resultState.setResultText("SORRY! YOU LOST");}
+
+        resultState.updateTimerLabel(tm.getFormattedTime());
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);

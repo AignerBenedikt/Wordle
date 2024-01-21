@@ -19,8 +19,16 @@ import java.io.IOException;
         @FXML
         private Label ResultText;
 
+        @FXML
+        public Label timerLabel2;
+
+        public void updateTimerLabel(String formattedTime) {
+            timerLabel2.setText(formattedTime);
+        }
+
         public void setResultText(String text) {
             ResultText.setText(text);
+
         }
 
         @FXML
