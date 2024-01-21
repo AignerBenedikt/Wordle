@@ -9,12 +9,12 @@
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
-   <HBox fillHeight="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="51.0" prefWidth="437.0" snapToPixel="false">
+   <HBox alignment="CENTER" fillHeight="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="51.0" prefWidth="437.0" snapToPixel="false">
       <rotationAxis>
          <Point3D />
       </rotationAxis>
       <children>
-         <Label fx:id="timerLabel2" alignment="CENTER" contentDisplay="TOP" pickOnBounds="false" prefHeight="43.0" prefWidth="165.0">
+         <Label fx:id="timerLabel2" alignment="CENTER" contentDisplay="CENTER" pickOnBounds="false" prefHeight="43.0" prefWidth="165.0" textAlignment="CENTER">
          </Label>
       </children>
    </HBox>
@@ -306,7 +306,7 @@
             <HBox.margin>
                <Insets left="-40.0" />
             </HBox.margin></Button>
-         <TextField fx:id="guessInput" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" onKeyPressed="#realKeyboardInput" onKeyReleased="#handleKeyReleased" prefHeight="28.0" prefWidth="167.0">
+         <TextField fx:id="guessInput" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" onKeyPressed="#realKeyboardInput"  prefHeight="28.0" prefWidth="167.0">
             <HBox.margin>
                <Insets left="20.0" right="20.0" />
             </HBox.margin>

@@ -145,11 +145,11 @@ public class WordleController {
     public void realKeyboardInput(KeyEvent keyEvent) {
 
         setEvent(keyEvent);
-        if (guessInput.getText().length() > 5) {
-            guessInput.setText(guessInput.getText().substring(0, guessInput.getLength() - 1));
-            guessInput.setEditable(false);
+        if (guessInput.getText().length() >= 5) {
+            guessInput.setText(guessInput.getText().substring(0, guessInput.getLength()-1));
+            ((TextField) event.getSource()).positionCaret(guessInput.getLength());
 
-        } else guessInput.setEditable(true);
+        }
 /*
         if (keyEvent.getCode().isLetterKey()){
 
@@ -169,7 +169,7 @@ public class WordleController {
         // checkguess(int i) -> switch int i case 1: checkguess1, case 2: checkguess2 ,....
 
     }
-    public void handleKeyReleased(KeyEvent event) {
+   /* public void handleKeyReleased(KeyEvent event) {
         // Überprüfe, ob die gedrückte Taste ein Buchstabe ist
         if (event.getCode().isLetterKey()) {
             // Hole den aktuelle Text aus dem TextField
@@ -197,6 +197,8 @@ public class WordleController {
             ((TextField) event.getSource()).positionCaret(updatedText.length());
         }
     }
+
+    */
     public void checkGuess(int i) {
         String guess = guessInput.getText().toUpperCase();
         Label[] row = new Label[0];
@@ -243,7 +245,7 @@ public class WordleController {
 
         handleGuess(guess,row);
 
-        if (i==6){
+        if (i==6 && counter == 6){
             try {
 
                 youLost();
@@ -344,7 +346,6 @@ public class WordleController {
     public void wordAlreadyUsed() {
 
         guessInput.clear();
-
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("Word already was written");
         alert.setHeaderText(null);
