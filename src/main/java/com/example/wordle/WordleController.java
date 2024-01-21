@@ -150,12 +150,7 @@ public class WordleController {
             ((TextField) event.getSource()).positionCaret(guessInput.getLength());
 
         }
-/*
-        if (keyEvent.getCode().isLetterKey()){
 
-        }
-
- */
 
         if (keyEvent.getCode().equals(KeyCode.ENTER)) {
             if (initialize){
@@ -169,36 +164,7 @@ public class WordleController {
         // checkguess(int i) -> switch int i case 1: checkguess1, case 2: checkguess2 ,....
 
     }
-   /* public void handleKeyReleased(KeyEvent event) {
-        // Überprüfe, ob die gedrückte Taste ein Buchstabe ist
-        if (event.getCode().isLetterKey()) {
-            // Hole den aktuelle Text aus dem TextField
-            String currentText = ((TextField) event.getSource()).getText();
 
-            // Füge den umgewandelten Buchstaben am Ende des Texts hinzu
-            String updatedText = currentText + event.getText().toUpperCase();
-
-            // Setze den aktualisierten Text ins TextField
-            ((TextField) event.getSource()).setText(updatedText);
-
-            // Setze den Cursor an das Ende des Textfelds
-            ((TextField) event.getSource()).positionCaret(updatedText.length());
-
-            // Lösche den ursprünglichen Kleinbuchstaben
-            if (currentText.length() > 0) {
-                // Falls der Text nicht leer ist, lösche den letzten Buchstaben
-                updatedText = currentText.substring(0, currentText.length() - 1) + event.getText().toUpperCase();
-            }
-
-            // Setze den aktualisierten Text ins TextField
-            ((TextField) event.getSource()).setText(updatedText);
-
-            // Setze den Cursor an das Ende des Textfelds
-            ((TextField) event.getSource()).positionCaret(updatedText.length());
-        }
-    }
-
-    */
     public void checkGuess(int i) {
         String guess = guessInput.getText().toUpperCase();
         Label[] row = new Label[0];
