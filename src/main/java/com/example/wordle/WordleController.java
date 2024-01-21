@@ -394,6 +394,7 @@ public class WordleController {
         resultState.updateTimerLabel(tm.getFormattedTime());
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene.getStylesheets().add(WordleApplication.class.getResource("Styles.css").toExternalForm());
         stage.setScene(scene);
         stage.show();
     }
