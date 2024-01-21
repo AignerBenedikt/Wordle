@@ -1,17 +1,14 @@
 
 .button {
-    -fx-background-color: white;
+    -fx-background-color: #dedede;
     -fx-text-fill: black;
     -fx-min-height: 50;
     -fx-min-width: 50;
-    -fx-border-color: #998b8b;
-    -fx-border-radius: 5;
+    -fx-border-color: black;
 }
 .button:hover {
-    -fx-background-color: #887E7E;
+    -fx-background-color: #dcedf5;
     -fx-scale-y: 0.95;
-    -fx-border-radius: 5;
-
 
 }
 
@@ -22,11 +19,8 @@
 }
 
 .label {
-    -fx-border-radius: 5;
-    -fx-border-color: #998b8b;
-
+    -fx-background-color: #dedede;
 }
-
 
 /*
 .hbox:disabled {

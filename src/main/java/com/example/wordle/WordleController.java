@@ -145,7 +145,7 @@ public class WordleController {
     public void realKeyboardInput(KeyEvent keyEvent) {
 
         setEvent(keyEvent);
-        if (guessInput.getText().length() >= 5) {
+        if (guessInput.getText().length() == 5 && !keyEvent.getCode().equals(KeyCode.ENTER)) {
             guessInput.setText(guessInput.getText().substring(0, guessInput.getLength()-1));
             ((TextField) event.getSource()).positionCaret(guessInput.getLength());
 
