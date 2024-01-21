@@ -43,15 +43,8 @@ public class WordleController {
         });
     }
 
-
-    public Button Guess1;
-    public Button Guess2;
-    public Button Guess3;
-    public Button Guess4;
-    public Button Guess5;
-    public Button Guess6;
     public Button Back;
-    public Button Delete;
+    public Button Enter;
     public Button Q;
     public Button W;
     public Button E;
@@ -117,10 +110,7 @@ public class WordleController {
         System.exit(0);
     }
 
-    @FXML
-    protected void setDelete() {
-        guessInput.clear();
-    }
+
 
     @FXML
     protected void setBack() {
@@ -129,6 +119,15 @@ public class WordleController {
         } catch (StringIndexOutOfBoundsException ignored) {
 
         }
+    }
+    @FXML
+    public void setEnter() {
+        if (initialize){
+            tm.startTimer();
+            initialize = false;
+        }
+        checkGuess(counter);
+        counter++;
     }
 
     @FXML
@@ -411,4 +410,6 @@ public class WordleController {
     public void setEvent(KeyEvent event) {
         this.event = event;
     }
+
+
 }
