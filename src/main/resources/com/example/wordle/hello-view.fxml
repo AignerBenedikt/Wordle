@@ -15,7 +15,9 @@
       </rotationAxis>
       <children>
          <Label fx:id="timerLabel2" alignment="CENTER" contentDisplay="CENTER" pickOnBounds="false" prefHeight="43.0" prefWidth="165.0" style="-fx-border-color: black;" textAlignment="CENTER">
-         </Label>
+            <font>
+               <Font size="20.0" />
+            </font></Label>
       </children>
    </HBox>
    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">

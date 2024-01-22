@@ -1,6 +1,7 @@
 package com.example.wordle;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -27,7 +28,7 @@ public class WordleController {
     TimeManager tm = new TimeManager();
     WordManager wm = new WordManager();
     BuchstabenManager bm = new BuchstabenManager();
-    String word = "REGEN";
+    String word = "";
     boolean initialize = true;
     int counter;
     int[] array;
@@ -36,7 +37,7 @@ public class WordleController {
 
     public WordleController() {
         wm.generateWordList(5);
-        //this.word = wm.SolutionWord();
+        this.word = wm.SolutionWord();
         this.counter = 1;
         tm.setOnTimeTick(() -> {
             timerLabel2.setText(tm.getFormattedTime());
@@ -143,13 +144,28 @@ public class WordleController {
     }
 
     public void realKeyboardInput(KeyEvent keyEvent) {
+        guessInput.addEventFilter(KeyEvent.KEY_TYPED,  new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
 
-        setEvent(keyEvent);
-        if (guessInput.getText().length() == 5 && !keyEvent.getCode().equals(KeyCode.ENTER)) {
+                if (" ".equals(event.getCharacter()) || !Character.isLetter(event.getCharacter().charAt(0))){
+                    event.consume();
+                }
+
+            }
+
+        });
+
+
+
+
+
+        if (guessInput.getText().length() == 5 && !keyEvent.getCode().equals(KeyCode.ENTER) && keyEvent.getCode().isLetterKey()) {
             guessInput.setText(guessInput.getText().substring(0, guessInput.getLength()-1));
             ((TextField) event.getSource()).positionCaret(guessInput.getLength());
 
         }
+        setEvent(keyEvent);
 
 
            if (keyEvent.getCode().equals(KeyCode.ENTER)) {
@@ -159,6 +175,7 @@ public class WordleController {
             }
             checkGuess(counter);
             counter++;
+
         }
 
         // checkguess(int i) -> switch int i case 1: checkguess1, case 2: checkguess2 ,....

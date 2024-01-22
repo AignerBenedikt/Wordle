@@ -96,8 +96,6 @@ public class TimeManager {
         }
     }
 
-    @FXML
-    private Button ChangeSreenButton;
     public void handleTimeUp() {
 
        /* ActionEvent simulatedEvent = new ActionEvent(ChangeSreenButton, ChangeSreenButton);

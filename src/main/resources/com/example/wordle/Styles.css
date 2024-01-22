@@ -1,25 +1,17 @@
-/*.vbox{
-    -fx-background-color: gold;
-}
-.pane{
 
-    -fx-background-color: lightblue;
-
-}
-
- */
 .button {
     -fx-background-color: #dedede;
     -fx-text-fill: black;
     -fx-min-height: 50;
     -fx-min-width: 50;
     -fx-border-color: black;
+    -fx-border-radius: 3;
 }
 .button:hover {
+
     -fx-background-color: #dcedf5;
     -fx-scale-y: 0.95;
     -fx-scale-x: 0.95;
-
 
 }
 
@@ -32,6 +24,7 @@
 .label {
     -fx-background-color: #dedede;
     -fx-border-color: black;
+    -fx-border-radius: 3;
 
 }
 
@@ -39,14 +32,8 @@ label[for=timerLabel2]{
     -fx-background-color: #dedede;
     -fx-border-color: black;
 }
-/*
-.hbox:disabled {
-    background-color: #E6E5E5;
-    color: linen;
-    opacity: 1;
-}
 
- */
+
 
 
 
