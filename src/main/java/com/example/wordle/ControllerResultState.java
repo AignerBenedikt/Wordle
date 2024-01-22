@@ -13,8 +13,6 @@ import java.io.IOException;
 
 public class ControllerResultState {
 
-    private WordleController wordleController;
-
     @FXML
     private Label ResultText;
 
@@ -27,7 +25,7 @@ public class ControllerResultState {
 
     public void setResultText(String text) {
         ResultText.setText(text);
-
+        //ResultText.setId("Result-Label");
     }
 
     @FXML

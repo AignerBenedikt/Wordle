@@ -1,12 +1,18 @@
 package com.example.wordle;
 import javafx.animation.AnimationTimer;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
+import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
 public class TimeManager {
+
+    private WordleController wordleController;
+    // und nicht WordlController wc = new WordlController !
+    // Dies würde eine neue Instanz erstellen und würde nicht auf die bereits vorhandene Instanz zugreifen.
 
     private int secondsRemaining;
     private Timer timer;
@@ -22,11 +28,11 @@ public class TimeManager {
     // dem Konstruktor werden Parameter und Klassen-Instanzen übergeben
     public TimeManager() {
             aniTime = new AnimationTimer() {
-                @Override
-                public void handle(long now) {
-                    onTimeTick.run();
-                }
-            };
+            @Override
+            public void handle(long now) {
+                onTimeTick.run();
+            }
+        };
         }
 
     /*
@@ -49,7 +55,7 @@ public class TimeManager {
     // setzt die verbleibende Zeit
     public void startTimer() {
 
-        secondsRemaining = 300;
+        secondsRemaining = 5;
         timer = new Timer(true); // Deamon-Thread (wenn das Haupt Programm alle Non-Deamon Threads beendet hat wird auch der Timer beendet)
         timer.scheduleAtFixedRate(new TimerTask() { // es wird auf die scheduleAtFixedRate Methode der Java-Klasse Timer zugegriffen.
             @Override // stellt sicher das "run" ist eine Methode der übergeordneten java-Klasse "TimerTask" ist
@@ -91,16 +97,15 @@ public class TimeManager {
         formattedTime = getFormattedTime();
 
         if (secondsRemaining <= 0) {
+            wordleController.TimeUp(true); // die Methode "handleTimeUp" im BuchstabenManger wird aufgerufen
             timer.cancel(); // die Methode "Timer" wird abgebrochen
-            handleTimeUp(); // die Methode "handleTimeUp" im BuchstabenManger wird aufgerufen
+
         }
     }
 
-    @FXML
-    private Button ChangeSreenButton;
     public void handleTimeUp() {
 
-       /* ActionEvent simulatedEvent = new ActionEvent(ChangeSreenButton, ChangeSreenButton);
+       /*ActionEvent simulatedEvent = new ActionEvent(ChangeSreenButton, ChangeSreenButton);
         try {
             // Rufe changeToResultState mit dem simulierten Event auf
             wc.changeToResultState(simulatedEvent);
@@ -108,13 +113,13 @@ public class TimeManager {
             e.printStackTrace();
         }*/
     }
+
     public String getFormattedTime() {
         int minutes = secondsRemaining / 60;
         int seconds = secondsRemaining % 60;
-        int hundredths = (int) ((secondsRemaining - Math.floor(secondsRemaining)) * 100);
 
         // Gibt die formatierte Zeit im Format "MM:SS:HH" zurück.
-        return String.format("%02d:%02d:%02d", minutes, seconds, hundredths);
+        return String.format("%02d:%02d", minutes, seconds);
 
     }
 }

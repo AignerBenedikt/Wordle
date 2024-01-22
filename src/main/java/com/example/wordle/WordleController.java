@@ -27,7 +27,7 @@ public class WordleController {
     TimeManager tm = new TimeManager();
     WordManager wm = new WordManager();
     BuchstabenManager bm = new BuchstabenManager();
-    String word = "REGEN";
+    String word = "";
     boolean initialize = true;
     int counter;
     int[] array;
@@ -36,7 +36,7 @@ public class WordleController {
 
     public WordleController() {
         wm.generateWordList(5);
-        //this.word = wm.SolutionWord();
+        this.word = wm.SolutionWord();
         this.counter = 1;
         tm.setOnTimeTick(() -> {
             timerLabel2.setText(tm.getFormattedTime());
@@ -152,7 +152,7 @@ public class WordleController {
         }
 
 
-           if (keyEvent.getCode().equals(KeyCode.ENTER)) {
+        if (keyEvent.getCode().equals(KeyCode.ENTER)) {
             if (initialize){
                 tm.startTimer();
                 initialize = false;
@@ -211,7 +211,7 @@ public class WordleController {
 
         handleGuess(guess,row);
 
-        if (i==6 && counter == 6 || tm.getFormattedTime().equals("00:00:00")){
+        if (i==6 && counter == 6){
             try {
 
                 youLost();
@@ -335,7 +335,7 @@ public class WordleController {
             try {
                 tm.stopTimer();
                 timerLabel2.setText(tm.getFormattedTime());
-                changeToResultState(getEvent(),b);
+                changeToResultState(getEvent(),true, false);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
@@ -347,12 +347,33 @@ public class WordleController {
             try {
                 tm.stopTimer();
                 timerLabel2.setText(tm.getFormattedTime());
-                changeToResultState(getEvent(),false);
+                changeToResultState(getEvent(),false, false);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
 
 
+    }
+
+    public void TimeUp(boolean a) {
+
+        if (a) {
+            /*
+            disableAllGuessButtons();
+            disableAllLetter();
+            playAgain.setVisible(true);
+            quit.setVisible(true);
+            guessInput.setDisable(true);
+            */
+            try {
+                tm.stopTimer();
+                timerLabel2.setText(tm.getFormattedTime());
+                changeToResultState(getEvent(),false, true);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+
+        }
     }
 
     public void handleGuess(String guess, Label[] row2) {
@@ -377,7 +398,7 @@ public class WordleController {
     }
 
     @FXML
-    protected void changeToResultState(KeyEvent event, boolean b) throws IOException {
+    protected void changeToResultState(KeyEvent event, boolean b, boolean a) throws IOException {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("LastScreen.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
@@ -387,14 +408,18 @@ public class WordleController {
         // Setze den Text der Labels direkt
         if (b){
             resultState.setResultText("CONGRATULATION! YOU WON!");
-        } else {
+        } else if (a) {
+            resultState.setResultText("SORRY! TIME IS UP");}
+        else {
             resultState.setResultText("SORRY! YOU LOST");}
+
 
        // resultState.updateTimerLabel(tm.getFormattedTime());
         resultState.updateTimerLabel(tm.getFormattedTime());
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene.getStylesheets().add(WordleApplication.class.getResource("Styles.css").toExternalForm());
+
         stage.setScene(scene);
         stage.show();
     }

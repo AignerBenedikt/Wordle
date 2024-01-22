@@ -28,6 +28,13 @@
     -fx-scale-x: 0.9;
 
 }
+.result-label {
+     -fx-border-radius: 5;
+        -fx-border-color: #998b8b;
+        -fx-font-family: 'YourFontName', sans-serif;
+        -fx-font-size: 16px;
+        -fx-text-fill: #000000;
+}
 
 .label {
     -fx-background-color: #dedede;
