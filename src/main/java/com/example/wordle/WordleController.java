@@ -123,7 +123,7 @@ public class WordleController {
     @FXML
     public void setEnter() {
         if (initialize){
-            tm.startTimer();
+            tm.startTimer(this);
             initialize = false;
         }
         checkGuess(counter);
@@ -154,7 +154,7 @@ public class WordleController {
 
         if (keyEvent.getCode().equals(KeyCode.ENTER)) {
             if (initialize){
-                tm.startTimer();
+                tm.startTimer(this);
                 initialize = false;
             }
             checkGuess(counter);
@@ -319,7 +319,6 @@ public class WordleController {
 
         alert.showAndWait();
 
-
     }
 
     public void youWon(boolean b) {
@@ -366,7 +365,7 @@ public class WordleController {
             guessInput.setDisable(true);
             */
             try {
-                tm.stopTimer();
+                // tm.stopTimer();
                 timerLabel2.setText(tm.getFormattedTime());
                 changeToResultState(getEvent(),false, true);
             } catch (IOException e) {
@@ -408,7 +407,8 @@ public class WordleController {
         // Setze den Text der Labels direkt
         if (b){
             resultState.setResultText("CONGRATULATION! YOU WON!");
-        } else if (a) {
+        } else if (tm.getFormattedTime().equals("00:00")) {
+            TimeUp(true);
             resultState.setResultText("SORRY! TIME IS UP");}
         else {
             resultState.setResultText("SORRY! YOU LOST");}

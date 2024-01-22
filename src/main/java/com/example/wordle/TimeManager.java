@@ -31,6 +31,7 @@ public class TimeManager {
             @Override
             public void handle(long now) {
                 onTimeTick.run();
+
             }
         };
         }
@@ -42,6 +43,7 @@ public class TimeManager {
                 public void handle(long now) {
                     handleTimerTick();
                 }
+
             };
         }
     */
@@ -53,7 +55,7 @@ public class TimeManager {
     }
 
     // setzt die verbleibende Zeit
-    public void startTimer() {
+    public void startTimer(WordleController wordleController) {
 
         secondsRemaining = 5;
         timer = new Timer(true); // Deamon-Thread (wenn das Haupt Programm alle Non-Deamon Threads beendet hat wird auch der Timer beendet)
@@ -73,7 +75,7 @@ public class TimeManager {
                         }
                 }
                  */
-                handleTimerTick();
+                handleTimerTick(wordleController);
             }
         }, 0, 1000); //  der Timer tickt jede Sekunde (1000 millisek)
 
@@ -91,13 +93,14 @@ public class TimeManager {
         }
     }
 
-    private void handleTimerTick() {
+    private void handleTimerTick(WordleController wc) {
+
         secondsRemaining--; // verringert den Timer im 1 Sekunde --
 
         formattedTime = getFormattedTime();
 
         if (secondsRemaining <= 0) {
-            wordleController.TimeUp(true); // die Methode "handleTimeUp" im BuchstabenManger wird aufgerufen
+            wc.TimeUp(true); // die Methode "handleTimeUp" im BuchstabenManger wird aufgerufen
             timer.cancel(); // die Methode "Timer" wird abgebrochen
 
         }
