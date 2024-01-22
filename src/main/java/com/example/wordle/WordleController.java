@@ -27,7 +27,7 @@ public class WordleController {
     TimeManager tm = new TimeManager();
     WordManager wm = new WordManager();
     BuchstabenManager bm = new BuchstabenManager();
-    String word = "";
+    String word = "REGEN";
     boolean initialize = true;
     int counter;
     int[] array;
@@ -36,7 +36,7 @@ public class WordleController {
 
     public WordleController() {
         wm.generateWordList(5);
-        this.word = wm.SolutionWord();
+        //this.word = wm.SolutionWord();
         this.counter = 1;
         tm.setOnTimeTick(() -> {
             timerLabel2.setText(tm.getFormattedTime());
@@ -129,7 +129,7 @@ public class WordleController {
         checkGuess(counter);
         counter++;
     }
-    
+
 
     @FXML
     protected void Letter(ActionEvent actionEvent) {
@@ -152,7 +152,7 @@ public class WordleController {
         }
 
 
-        if (keyEvent.getCode().equals(KeyCode.ENTER)) {
+           if (keyEvent.getCode().equals(KeyCode.ENTER)) {
             if (initialize){
                 tm.startTimer();
                 initialize = false;
@@ -211,7 +211,7 @@ public class WordleController {
 
         handleGuess(guess,row);
 
-        if (i==6 && counter == 6){
+        if (i==6 && counter == 6 || tm.getFormattedTime().equals("00:00:00")){
             try {
 
                 youLost();

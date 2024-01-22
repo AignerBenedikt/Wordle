@@ -48,20 +48,33 @@ public class BuchstabenManager {
                     }
                     if (eingabe.charAt(m) == eingabe.charAt(n) && anzeigeArray[m] > 0 && anzeigeArray[n] > 0) { // Beide Stellen des Lösungswort müssen gleich sein, beide Stellen dürfen den Wert 0 nicht haben [0 != 0]
 
-                            if (anzeigeArray[m] == 2) {                //Falls das Lösungswort einmal vorkommt oder das
+                            if (anzeigeArray[m] == 2) {//Falls das Lösungswort einmal vorkommt oder das
+
                                 if (countletter == 1) {
+
                                     anzeigeArray[n] = 0;
+
                                 }
                                 if (countletter > 1 && anzeigeArray[m]>anzeigeArray[n]) {
-                                    anzeigeArray[n] = 0;
-                                }else countletter--;
+
+                                   // anzeigeArray[n] = 0;
+                                    countletter--;
+
+                                }//else countletter--;
+
                             } else if (anzeigeArray[m] == 1) {
-                                if (countletter == 1 && anzeigeArray[m]>anzeigeArray[n]) {
+
+                                if (countletter == 1 && (anzeigeArray[m]>anzeigeArray[n] || anzeigeArray[m]==anzeigeArray[n])) {
+
                                     anzeigeArray[n] = 0;
+
                                 }
                                 if (countletter > 1) {
+
                                     countletter--;
+
                                 }
+
                             }
 
 
