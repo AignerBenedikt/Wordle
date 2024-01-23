@@ -1,26 +1,28 @@
 package com.example.wordle;
 
-public class BuchstabenManager {
+import java.util.Arrays;
+
+public class LetterManager {
 
     StringBuilder let = new StringBuilder();
 
-    public int[] comparisonOfLetters(String loesung, String eingabe) {
+    public int[] comparisonOfLetters(String solution, String userInput) {
 
         let = new StringBuilder();
-        int[] anzeigeArray = new int[loesung.length()];                 // 0 = Zeichen falsch; 1 = Zeichen gelb (vorhanden aber falsche Stelle), 2 = Zeichen richtig grün
+        int[] anzeigeArray = new int[solution.length()];                 // 0 = Zeichen falsch; 1 = Zeichen gelb (vorhanden aber falsche Stelle), 2 = Zeichen richtig grün
 
 
-        for (int i = 0; i < loesung.length(); i++) {
+        for (int i = 0; i < solution.length(); i++) {
 
-            if (eingabe.charAt(i) == loesung.charAt(i)) {// Zeichen ist richtig => anzeigeArray[i] = 2
+            if (userInput.charAt(i) == solution.charAt(i)) {// Zeichen ist richtig => anzeigeArray[i] = 2
 
                 anzeigeArray[i] = 2;
 
             } else {
 
-                for (int j = 0; j < loesung.length(); j++) {
+                for (int j = 0; j < solution.length(); j++) {
 
-                    if (eingabe.charAt(i) == loesung.charAt(j)) {// Zeichen ist vorhanden aber falsche Stelle => anzeigeArray[i] = 1
+                    if (userInput.charAt(i) == solution.charAt(j)) {// Zeichen ist vorhanden aber falsche Stelle => anzeigeArray[i] = 1
 
                         anzeigeArray[i] = 1;
 
@@ -29,10 +31,12 @@ public class BuchstabenManager {
             }
         }
 
+        System.out.println(userInput+":  "+ Arrays.toString(anzeigeArray) +"   SOLUTION:"+solution);
 
-        for (int m = 0; m < 5; m++) {
+        for (int m = 0; m < 5; m++) {                                                     // M steht für den Buchstaben der gerade abgefragt wird und n steht für den Buchstaben der mit M identisch ist und verglichen wird
+                                                                                          // statt 5 bei inviduelle Länge solution.length angeben
 
-            int countletter = countLetter(String.valueOf(eingabe.charAt(m)), loesung);  //Anzahl eines Buchstaben in dem Lösungswort
+            int countletter = countLetter(String.valueOf(userInput.charAt(m)), solution);  //Anzahl eines Buchstaben in dem Lösungswort
 
             if (countletter >= 1) {                                                       //Falls der Buchstabe min 1 Mal vorkommt
 
@@ -43,13 +47,14 @@ public class BuchstabenManager {
                         continue;
 
                     }
-                    if (eingabe.charAt(m) == eingabe.charAt(n) && anzeigeArray[m] > 0 && anzeigeArray[n] > 0) { // Beide Stellen des Lösungswort müssen gleich sein, beide Stellen dürfen den Wert 0 nicht haben [0 != 0]
+                    if (userInput.charAt(m) == userInput.charAt(n) && anzeigeArray[m] > 0 && anzeigeArray[n] > 0) { // Beide Stellen des Lösungswort müssen gleich sein, beide Stellen dürfen den Wert 0 nicht haben [0 != 0]
 
                         if (anzeigeArray[m] == 2) {//Falls das Lösungswort einmal vorkommt oder das
 
                             if (countletter == 1) {
 
                                 anzeigeArray[n] = 0;
+                                System.out.println(userInput+":  "+ Arrays.toString(anzeigeArray) +"   SOLUTION:"+solution);
 
                             }
                             if (countletter > 1 && anzeigeArray[m] > anzeigeArray[n]) {
@@ -72,6 +77,7 @@ public class BuchstabenManager {
 
                                 countletter--;
 
+
                             } else anzeigeArray[m] = 0;
 
 
@@ -82,9 +88,11 @@ public class BuchstabenManager {
                 }
             }
         }
+        System.out.println(userInput+":  "+ Arrays.toString(anzeigeArray) +"   SOLUTION:"+solution);
 
 
-        //return anzeigeFarbausgabeneu(anzeigeArray,eingabe);
+
+        //return anzeigeFarbausgabeneu(anzeigeArray,userInput);
 
 
         return anzeigeArray;

@@ -24,11 +24,11 @@ public class WordleController {
     KeyEvent event;
     TimeManager tm = new TimeManager();
     WordManager wm = new WordManager();
-    BuchstabenManager bm = new BuchstabenManager();
+    LetterManager bm = new LetterManager();
     String solutionWord;
     boolean initialize = true;
     int counter;
-    int[] array;
+    int[] arrayWordCompared;
     List<String> stringList = new ArrayList<>();
     String guessWord;
 
@@ -114,12 +114,11 @@ public class WordleController {
     protected void setBack() {
         try {
             guessInput.setText(guessInput.getText().substring(0, guessInput.getLength() - 1));
-        } catch (StringIndexOutOfBoundsException ignored) {
-
-        }
+        } catch (StringIndexOutOfBoundsException ignored) {}
     }
     @FXML
     public void setEnter() {
+
         if (initialize){
             tm.startTimer();
             initialize = false;
@@ -247,7 +246,7 @@ public class WordleController {
     }
 
 
-    public void colorBoxes(int[] anzeigeArray, String eingabe, Label[] row) {
+    public void colorBoxes(int[] anzeigeArray, String userInput, Label[] row) {
 
         Map<String, Button> buttonMap = new HashMap<>() {{
             put("A", A);
@@ -278,9 +277,9 @@ public class WordleController {
             put("Z", Z);
         }};
 
-        for (int i = 0; i < eingabe.length(); i++) {
+        for (int i = 0; i < userInput.length(); i++) {
 
-            row[i].setText(String.valueOf(eingabe.charAt(i)));
+            row[i].setText(String.valueOf(userInput.charAt(i)));
 
             if (anzeigeArray[i] == 0) {
 
@@ -319,6 +318,9 @@ public class WordleController {
                 }
             }
         }
+
+
+
     }
 
     public void wordDoesntExist() {
@@ -326,9 +328,9 @@ public class WordleController {
         guessInput.clear();
 
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Word doesnt Exitst");
+        alert.setTitle("The Word doesn't exits");
         alert.setHeaderText(null);
-        alert.setContentText("The Word doesnt match with any Words in our List");
+        alert.setContentText("The Word doesn't match with any Words in our List");
 
         alert.showAndWait();
     }
@@ -337,7 +339,7 @@ public class WordleController {
 
         guessInput.clear();
         Alert alert = new Alert(Alert.AlertType.WARNING);
-        alert.setTitle("Word already was written");
+        alert.setTitle("The Word was already written");
         alert.setHeaderText(null);
         alert.setContentText("Try another word out (Duplicate)");
 
@@ -354,26 +356,28 @@ public class WordleController {
 
     }
 
-    public void handleGuess(String guess, Label[] row2) {
+    public void handleGuess(String userInput, Label[] labelRow) {
 
 
-        if (stringList.contains(guess)) {
+        if (stringList.contains(userInput)) {
             wordAlreadyUsed();
             counter--;
             return;
-        } else stringList.add(guess);
+        } else stringList.add(userInput);
 
 
-        array = bm.comparisonOfLetters(solutionWord, guess);
-        colorBoxes(array, guess, row2);
+
+        arrayWordCompared = bm.comparisonOfLetters(solutionWord, userInput);
+        colorBoxes(arrayWordCompared, userInput, labelRow);
 
 
-        if(solutionWord.equals(guess)){
+        if(solutionWord.equals(userInput)){
             gameFinished(1);
         }
 
 
         guessInput.clear();
+
 
     }
 
