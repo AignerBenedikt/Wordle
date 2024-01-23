@@ -49,7 +49,7 @@ public class TimeManager {
     // setzt die verbleibende Zeit
     public void startTimer() {
 
-        secondsRemaining = 300;
+        secondsRemaining = 200;
         timer = new Timer(true); // Deamon-Thread (wenn das Haupt Programm alle Non-Deamon Threads beendet hat wird auch der Timer beendet)
         timer.scheduleAtFixedRate(new TimerTask() { // es wird auf die scheduleAtFixedRate Methode der Java-Klasse Timer zugegriffen.
             @Override // stellt sicher das "run" ist eine Methode der übergeordneten java-Klasse "TimerTask" ist
@@ -67,7 +67,7 @@ public class TimeManager {
                         }
                 }
                  */
-                handleTimerTick();
+                secondsRemaining--;
             }
         }, 0, 1000); //  der Timer tickt jede Sekunde (1000 millisek)
 
@@ -85,34 +85,24 @@ public class TimeManager {
         }
     }
 
-    private void handleTimerTick() {
+    /*private void handleTimerTick() {
         secondsRemaining--; // verringert den Timer im 1 Sekunde --
 
         formattedTime = getFormattedTime();
 
         if (secondsRemaining <= 0) {
             timer.cancel(); // die Methode "Timer" wird abgebrochen
-            handleTimeUp(); // die Methode "handleTimeUp" im BuchstabenManger wird aufgerufen
         }
     }
 
-    public void handleTimeUp() {
+     */
 
-       /* ActionEvent simulatedEvent = new ActionEvent(ChangeSreenButton, ChangeSreenButton);
-        try {
-            // Rufe changeToResultState mit dem simulierten Event auf
-            wc.changeToResultState(simulatedEvent);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
-    }
     public String getFormattedTime() {
         int minutes = secondsRemaining / 60;
         int seconds = secondsRemaining % 60;
-        int hundredths = (int) ((secondsRemaining - Math.floor(secondsRemaining)) * 100);
 
         // Gibt die formatierte Zeit im Format "MM:SS:HH" zurück.
-        return String.format("%02d:%02d:%02d", minutes, seconds, hundredths);
+        return String.format("%02d:%02d", minutes, seconds);
 
     }
 }

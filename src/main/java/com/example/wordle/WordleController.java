@@ -1,5 +1,6 @@
 package com.example.wordle;
 
+import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -156,12 +157,10 @@ public class WordleController {
 
         });
 
+        if (guessInput.getText().length() == 5 && !keyEvent.getCode().equals(KeyCode.ENTER)) {
 
-
-
-
-        if (guessInput.getText().length() == 5 && !keyEvent.getCode().equals(KeyCode.ENTER) && keyEvent.getCode().isLetterKey()) {
             guessInput.setText(guessInput.getText().substring(0, guessInput.getLength()-1));
+
             ((TextField) event.getSource()).positionCaret(guessInput.getLength());
 
         }
@@ -169,12 +168,25 @@ public class WordleController {
 
 
            if (keyEvent.getCode().equals(KeyCode.ENTER)) {
+
             if (initialize){
+
                 tm.startTimer();
                 initialize = false;
+
             }
             checkGuess(counter);
             counter++;
+
+               new AnimationTimer() {
+                   @Override
+                   public void handle(long now) {
+                       if (tm.getFormattedTime().equals("00:00")){
+                           gameFinished(-1);
+                           this.stop();
+                       }
+                   }
+               }.start();
 
         }
 
@@ -228,10 +240,10 @@ public class WordleController {
 
         handleGuess(guess,row);
 
-        if (i==6 && counter == 6 || tm.getFormattedTime().equals("00:00:00")){
+        if (i==6 && counter == 6){
             try {
 
-                youLost();
+                gameFinished(0);
 
             } catch (NullPointerException ignored) {}
         }
@@ -339,36 +351,11 @@ public class WordleController {
 
     }
 
-    public void youWon(boolean b) {
 
-        if (b) {
-            /*
-            disableAllGuessButtons();
-            disableAllLetter();
-            playAgain.setVisible(true);
-            quit.setVisible(true);
-            guessInput.setDisable(true);
-            */
-            try {
-                tm.stopTimer();
-                timerLabel2.setText(tm.getFormattedTime());
-                changeToResultState(getEvent(),b);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
-        }
-    }
-    public void youLost() {
-
-            try {
-                tm.stopTimer();
-                timerLabel2.setText(tm.getFormattedTime());
-                changeToResultState(getEvent(),false);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
+    public void gameFinished(int b) {
+        tm.stopTimer();
+        timerLabel2.setText(tm.getFormattedTime());
+        changeToResultState(getEvent(),b);
 
     }
 
@@ -386,7 +373,9 @@ public class WordleController {
         colorBoxes(array, guess, row2);
 
 
-        youWon(word.equals(guess));
+        if(word.equals(guess)){
+            gameFinished(1);
+        }
 
 
         guessInput.clear();
@@ -394,26 +383,35 @@ public class WordleController {
     }
 
     @FXML
-    protected void changeToResultState(KeyEvent event, boolean b) throws IOException {
+    protected void changeToResultState(KeyEvent event, int b)  {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("LastScreen.fxml"));
-        Scene scene = new Scene(fxmlLoader.load());
+        Scene scene = null;
+        try {
+            scene = new Scene(fxmlLoader.load());
+            ControllerResultState resultState = fxmlLoader.getController();
 
-        ControllerResultState resultState = fxmlLoader.getController();
+            // Setze den Text der Labels direkt
+            if (b==1){
+                resultState.setResultText("CONGRATULATION! YOU WON!");
+            } else if (b==0){
+                resultState.setResultText("SORRY! YOU HAVE RUN OUT OF TRYS!");}
+            else if (b==-1){
+                resultState.setResultText("THE TIME HAS RUN OUT!");
+            }
 
-        // Setze den Text der Labels direkt
-        if (b){
-            resultState.setResultText("CONGRATULATION! YOU WON!");
-        } else {
-            resultState.setResultText("SORRY! YOU LOST");}
+            // resultState.updateTimerLabel(tm.getFormattedTime());
+            resultState.updateTimerLabel(tm.getFormattedTime());
 
-       // resultState.updateTimerLabel(tm.getFormattedTime());
-        resultState.updateTimerLabel(tm.getFormattedTime());
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            scene.getStylesheets().add(WordleApplication.class.getResource("Styles.css").toExternalForm());
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (NullPointerException ignored){}
 
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene.getStylesheets().add(WordleApplication.class.getResource("Styles.css").toExternalForm());
-        stage.setScene(scene);
-        stage.show();
+
     }
 
     public KeyEvent getEvent() {
