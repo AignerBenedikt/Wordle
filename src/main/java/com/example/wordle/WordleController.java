@@ -439,7 +439,7 @@ public class WordleController {
         Alert alert = new Alert(Alert.AlertType.WARNING);
         alert.setTitle("The Word was already written");
         alert.setHeaderText(null);
-        alert.setContentText("Try another word out (Duplicate)");
+        alert.setContentText("Try another word (Duplicate)");
 
         // Zeigt die Warnmeldung an und wartet auf eine Benutzerinteraktion
         alert.showAndWait();
