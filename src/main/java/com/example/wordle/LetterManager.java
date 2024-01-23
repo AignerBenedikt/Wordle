@@ -42,7 +42,7 @@ public class LetterManager {
 
                 for (int n = 0; n < 5; n++) {
 
-                    if (n == m) {                                                         //n==m steht für den Buchstabe der abgefragt wird und n stht für alle anderen Buchstaben die im Lösungswort vorkommen wäre die selbe Stelle und das wollen wir ja gar nicht abfragen
+                    if (n == m) {                                                         //n==m steht für den Buchstabe der abgefragt wird und n steht für alle anderen Buchstaben die im Lösungswort vorkommen wäre die selbe Stelle und das wollen wir ja gar nicht abfragen
 
                         continue;
 
