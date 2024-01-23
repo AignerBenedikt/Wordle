@@ -13,7 +13,6 @@ import java.io.IOException;
 
 public class ControllerResultState {
 
-    private WordleController wordleController;
 
     @FXML
     private Label ResultText;

@@ -4,22 +4,16 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
 public class WordManager {
 
-    private int wordLength;
     String SolutionWord;
     List<String>filteredList;
 
     public void setFilteredList(List<String> filteredList) {
         this.filteredList = filteredList;
-    }
-
-    public int getWordLength() {
-        return wordLength;
     }
 
     public String SolutionWord(){
@@ -31,41 +25,24 @@ public class WordManager {
         return SolutionWord;
     }
 
-    public void generateWordList(int wordLength) { // getWordlistbylenght || filterwordsbylength
-
-        List<String> filteredList = new LinkedList<>();
+    public void generateWordList() { // getWordlistbylenght || filterwordsbylength
 
         try {
             Path fl = Paths.get("src/main/resources/com/example/wordle/wordlistG.txt"); //Pfad bestimmen
 
             List<String> list = Files.readAllLines(fl); // Das File in eine Liste aus Strings formen
 
-            if (wordLength > 1) {
-
-                for (int i = 0; i < list.size() - 1; i++) {
-
-                    if (list.get(i).length() == wordLength) {
-
-                        filteredList.add(list.get(i));
-
-
-                    }
-                }
-                setFilteredList(filteredList);
-               // return filteredList;
-            }
+            setFilteredList(list);
 
         } catch (IOException e) {
 
             System.out.println("Dateipfad existiert nicht");
 
-        } catch (IllegalArgumentException e) {
+        } catch (NullPointerException e) {
 
-            System.out.println("Ich hab kein Wort mit Länge "+ getWordLength());
+            System.out.println("Die Liste ist null oder der Pfad ist falsch angegeben ");
 
-          //  return null;
         }
-        // return filteredList;
     }
 
 

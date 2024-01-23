@@ -33,11 +33,10 @@ public class WordleController {
     boolean initialize = true;
     int counter;
     int[] array;
-   // int counter = 6;
     List<String> stringList = new ArrayList<>();
 
     public WordleController() {
-        wm.generateWordList(5);
+        wm.generateWordList();
         this.word = wm.SolutionWord();
         this.counter = 1;
         tm.setOnTimeTick(() -> {
