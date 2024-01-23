@@ -1,7 +1,5 @@
 package com.example.wordle;
 import javafx.animation.AnimationTimer;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -12,11 +10,8 @@ public class TimeManager {
     private Timer timer;
 
     // private GameManagerSingleton GaMaSi;
-    private AnimationTimer aniTime;
+    private final AnimationTimer aniTime;
     private Runnable onTimeTick;
-
-    private String formattedTime;
-
 
 
     // dem Konstruktor werden Parameter und Klassen-Instanzen übergeben
