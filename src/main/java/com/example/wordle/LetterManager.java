@@ -2,10 +2,20 @@ package com.example.wordle;
 
 import java.util.Arrays;
 
+/**
+ * Verwaltet die Buchstaben für das Spiel, einschließlich des Vergleichs zwischen Benutzereingabe und Lösungswort.
+ */
 public class LetterManager {
 
     StringBuilder let = new StringBuilder();
 
+    /**
+     * Vergleicht die Buchstaben zwischen der Benutzereingabe und dem Lösungswort und gibt ein Array mit Indikatoren(Zahlen 1, 0 und -1) zurück.
+     *
+     * @param solution  Das Lösungswort.
+     * @param userInput Die Benutzereingabe.
+     * @return Ein Array von Indikatoren für jede Position im Lösungswort.
+     */
     public int[] comparisonOfLetters(String solution, String userInput) {
 
         let = new StringBuilder();
@@ -66,6 +76,7 @@ public class LetterManager {
 
                         } else if (anzeigeArray[m] == 1) {
 
+
                             if (countletter == 1 && (anzeigeArray[m] > anzeigeArray[n] || anzeigeArray[m] == anzeigeArray[n])) { // GUESS: NONNE LW: TANNE
 
                                 anzeigeArray[n] = 0;
@@ -73,7 +84,7 @@ public class LetterManager {
 
                             }
 
-                            if (countletter > 1 && anzeigeArray[m] > anzeigeArray[n]) {
+                            if (countletter > 1 && anzeigeArray[m] > anzeigeArray[n]  || anzeigeArray[m] < anzeigeArray[n]) {
 
                                 countletter--;
 

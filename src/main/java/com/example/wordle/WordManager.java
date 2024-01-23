@@ -7,6 +7,9 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Verwaltet die Wörter für das Spiel, einschließlich der Auswahl des Lösungsworts und der Wortliste.
+ */
 public class WordManager {
 
     String SolutionWord;
@@ -16,6 +19,11 @@ public class WordManager {
         this.filteredList = filteredList;
     }
 
+    /**
+     * Gibt ein zufällig ausgewähltes Lösungswort aus der gefilterten Liste zurück.
+     *
+     * @return Das ausgewählte Lösungswort.
+     */
     public String getSolutionWord(){
 
         Random random = new Random();
@@ -25,6 +33,10 @@ public class WordManager {
         return SolutionWord;
     }
 
+    /**
+     * Generiert die Wortliste, indem sie aus einer Textdatei eingelesen wird.
+     * Die Datei wird im Projektverzeichnis unter "src/main/resources/com/example/wordle/wordlistG.txt" erwartet.
+     */
     public void generateWordList() { // getWordlistbylenght || filterwordsbylength
 
         try {
@@ -40,12 +52,19 @@ public class WordManager {
 
         } catch (NullPointerException e) {
 
-            System.out.println("Die Liste ist null oder der Pfad ist falsch angegeben ");
+            System.out.println(
+                    "Die Liste ist null oder der Pfad ist falsch angegeben ");
 
         }
     }
 
 
+    /**
+     * Überprüft, ob ein bestimmtes Wort in der gefilterten Liste existiert.
+     *
+     * @param word Das zu überprüfende Wort.
+     * @return true, wenn das Wort existiert, andernfalls false.
+     */
     public boolean wordExist(String word) {
         return filteredList.contains(word);
     }
