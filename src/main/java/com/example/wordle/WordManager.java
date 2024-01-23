@@ -16,7 +16,7 @@ public class WordManager {
         this.filteredList = filteredList;
     }
 
-    public String SolutionWord(){
+    public String getSolutionWord(){
 
         Random random = new Random();
 

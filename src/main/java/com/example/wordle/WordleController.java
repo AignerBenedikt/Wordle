@@ -10,7 +10,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -21,23 +20,21 @@ import java.util.*;
 
 public class WordleController {
 
-    public HBox LetterRow3;
-    public HBox LetterRow2;
-    public HBox LetterRow1;
     public Label timerLabel2;
     KeyEvent event;
     TimeManager tm = new TimeManager();
     WordManager wm = new WordManager();
     BuchstabenManager bm = new BuchstabenManager();
-    String word = "";
+    String solutionWord;
     boolean initialize = true;
     int counter;
     int[] array;
     List<String> stringList = new ArrayList<>();
+    String guessWord;
 
     public WordleController() {
         wm.generateWordList();
-        this.word = wm.SolutionWord();
+        this.solutionWord = wm.getSolutionWord();
         this.counter = 1;
         tm.setOnTimeTick(() -> {
             timerLabel2.setText(tm.getFormattedTime());
@@ -194,7 +191,7 @@ public class WordleController {
     }
 
     public void checkGuess(int i) {
-        String guess = guessInput.getText().toUpperCase();
+        guessWord = guessInput.getText().toUpperCase();
         Label[] row = new Label[0];
 
 
@@ -224,10 +221,10 @@ public class WordleController {
                 break;
         }
 
-        System.out.println(word);
+        System.out.println(solutionWord);
 
 
-        if (!wm.wordExist(guess)) {
+        if (!wm.wordExist(guessWord)) {
 
             wordDoesntExist();
             counter--;
@@ -237,7 +234,7 @@ public class WordleController {
         }
 
 
-        handleGuess(guess,row);
+        handleGuess(guessWord,row);
 
         if (i==6 && counter == 6){
             try {
@@ -251,7 +248,6 @@ public class WordleController {
 
 
     public void colorBoxes(int[] anzeigeArray, String eingabe, Label[] row) {
-        //System.out.println(Arrays.toString(anzeigeArray));
 
         Map<String, Button> buttonMap = new HashMap<>() {{
             put("A", A);
@@ -368,11 +364,11 @@ public class WordleController {
         } else stringList.add(guess);
 
 
-        array = bm.comparisonOfLetters(word, guess);
+        array = bm.comparisonOfLetters(solutionWord, guess);
         colorBoxes(array, guess, row2);
 
 
-        if(word.equals(guess)){
+        if(solutionWord.equals(guess)){
             gameFinished(1);
         }
 
@@ -394,12 +390,11 @@ public class WordleController {
             if (b==1){
                 resultState.setResultText("CONGRATULATION! YOU WON!");
             } else if (b==0){
-                resultState.setResultText("SORRY! YOU HAVE RUN OUT OF TRYS!");}
+                resultState.setResultText("SORRY! YOU HAVE RUN OUT OF TRYS!"+System.lineSeparator()+"THE SOLUTION WORD WAS: "+ solutionWord);}
             else if (b==-1){
-                resultState.setResultText("THE TIME HAS RUN OUT!");
+                resultState.setResultText("THE TIME HAS RUN OUT!"+System.lineSeparator()+"THE SOLUTION WORD WAS: "+ solutionWord);
             }
 
-            // resultState.updateTimerLabel(tm.getFormattedTime());
             resultState.updateTimerLabel(tm.getFormattedTime());
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
