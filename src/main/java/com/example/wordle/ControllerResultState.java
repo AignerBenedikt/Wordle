@@ -1,5 +1,6 @@
 package com.example.wordle;
 
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,7 +32,7 @@ public class ControllerResultState {
 
     @FXML
     protected void quit() {
-        System.exit(0);
+        Platform.exit();
     }
 
     @FXML
@@ -41,7 +42,7 @@ public class ControllerResultState {
     "event.getSource()§ gibt das ursprüngliche Objekt zurück, auf dem die Aktion stattgefunden hat.
     dieses Event ist ein "Node" =  getScene().getWindow() wird verwendet, um das Window-Objekt (die Stage) zu erhalten.
      */
-        FXMLLoader fxmlLoader = new FXMLLoader(WordleApplication.class.getResource("hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(WordleApplication.class.getResource("Wordle.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage =(Stage) ((Node) event.getSource()).getScene().getWindow();
         scene.getStylesheets().add(WordleApplication.class.getResource("Styles.css").toExternalForm());
@@ -52,7 +53,7 @@ public class ControllerResultState {
     // ALT = ein neues Stage-Objekt wird erstellt ->  eine neue Instanz der Stage-Klasse erstellt, und das Fenster wird darauf aufgebaut.
     protected void playAgain() throws IOException {
     Stage stage = new Stage();
-    FXMLLoader fxmlLoader = new FXMLLoader(WordleApplication.class.getResource("hello-view.fxml"));
+    FXMLLoader fxmlLoader = new FXMLLoader(WordleApplication.class.getResource("Wordle.fxml"));
     Scene scene = new Scene(fxmlLoader.load());
     stage.setTitle("Wordle");
     stage.setScene(scene);

@@ -10,14 +10,13 @@ import java.io.IOException;
 public class WordleApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(WordleApplication.class.getResource("hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(WordleApplication.class.getResource("Wordle.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.setTitle("Wordle");
         scene.getStylesheets().add(WordleApplication.class.getResource("Styles.css").toExternalForm());
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
-        stage.setResizable(false);
     }
 
     public static void main(String[] args) {

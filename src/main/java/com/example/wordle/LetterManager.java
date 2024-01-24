@@ -19,6 +19,7 @@ public class LetterManager {
     public int[] comparisonOfLetters(String solution, String userInput) {
 
         let = new StringBuilder();
+
         int[] anzeigeArray = new int[solution.length()];                 // 0 = Zeichen falsch; 1 = Zeichen gelb (vorhanden aber falsche Stelle), 2 = Zeichen richtig grün
 
 
@@ -124,7 +125,6 @@ public class LetterManager {
     public int countLetter(String letter, String solution) {
         int count = 0;
         // StringBuilder zur Verhinderung von Doppelzählungen initialisieren
-        let = new StringBuilder();
 
         if (let.toString().contains(letter)) {
             // Einmalige Zählung des Buchstabens bereits erfolgt, daher Rückgabe von 0
@@ -139,6 +139,7 @@ public class LetterManager {
                 count++;
             }
         }
+
         if (count > 0) {
             // Der Buchstabe wurde mindestens einmal gezählt, füge ihn zum StringBuilder hinzu
             let.append(letter);
