@@ -10,7 +10,7 @@ public class LetterManager {
     StringBuilder let = new StringBuilder();
 
     /**
-     * Vergleicht die Buchstaben zwischen der Benutzereingabe und dem Lösungswort und gibt ein Array mit Indikatoren(Zahlen 1, 0 und -1) zurück.
+     * Vergleicht die Buchstaben zwischen der Benutzereingabe und dem Lösungswort und gibt ein Array mit Indikatoren(Zahlen 0, 1 und 2) zurück.
      *
      * @param solution  Das Lösungswort.
      * @param userInput Die Benutzereingabe.
@@ -51,7 +51,7 @@ public class LetterManager {
             //Anzahl eines Buchstaben in dem Lösungswort
 
             if (countletter >= 1) {
-                //Falls der Buchstabe min 1 Mal vorkommt, wenn nicht pasiert nichts
+                //Falls der Buchstabe min 1 Mal vorkommt, wenn nicht passiert nichts
 
                 for (int n = 0; n < 5; n++) {
 

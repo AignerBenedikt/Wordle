@@ -117,15 +117,6 @@ public class WordleController {
     public Label box54 = new Label();
 
 
-    /**
-     * Beendet das Programm ordnungsgemäß, indem System.exit(0) aufgerufen wird.
-     * Damit wird die Java Virtual Machine mit einem Statuscode von 0 beendet, was auf einen erfolgreichen Abschluss hinweist.
-     */
-    @FXML
-    protected void quit() {
-        System.exit(0);
-    }
-
 
     /**
      * Entfernt das letzte Zeichen aus dem Textfeld der Benutzereingabe.

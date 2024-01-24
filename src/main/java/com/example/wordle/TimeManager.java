@@ -55,7 +55,7 @@ public class TimeManager {
         // Aktualisierungszyklus eines Frames erfolgt typischerweise mehrere Male pro Sekunde
     }
 
-    // stopt die Timer Methode und die AnimationTimer Methode
+    // stoppt die Timer Methode und die AnimationTimer Methode
     public void stopTimer() {
         if (timer != null) {
             timer.cancel(); // ruft die Methode "cancel" der Java-Klasse "timer" auf.
