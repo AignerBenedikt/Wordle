@@ -15,6 +15,7 @@ public class WordleApplication extends Application {
         stage.setTitle("Wordle");
         scene.getStylesheets().add(WordleApplication.class.getResource("Styles.css").toExternalForm());
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
         stage.setResizable(false);
     }

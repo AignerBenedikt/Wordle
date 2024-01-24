@@ -288,7 +288,7 @@ public class WordleController {
         }
 
         // Gibt das Lösungswort aus (zum Debuggen)
-        System.out.println(solutionWord);
+       // System.out.println(solutionWord);
 
         // Überprüft, ob das eingegebene Wort existiert
 

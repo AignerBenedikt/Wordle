@@ -28,6 +28,11 @@
 
 }
 
+.text-field{
+    -fx-border-radius: 3;
+
+}
+
 label[for=timerLabel2]{
     -fx-background-color: #dedede;
     -fx-border-color: black;
