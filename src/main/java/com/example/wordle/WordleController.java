@@ -18,9 +18,13 @@ import java.util.*;
 
 //https://www.youtube.com/watch?v=B4t0Y40U4HI
 
+/**
+ * Controller class for the Wordle game.
+ */
 public class WordleController {
 
-
+    // Instance variables
+    // Initialize managers
     TimeManager tm = new TimeManager();
     WordManager wm = new WordManager();
     LetterManager bm = new LetterManager();
@@ -32,16 +36,22 @@ public class WordleController {
     String solutionWord;
 
 
+    /**
+     * Constructor for WordleController.
+     */
     public WordleController() {
+        // set initial values
+
         wm.generateWordList();
         this.solutionWord = wm.getSolutionWord();
-        // this.solutionWord = "STATT";
         this.counter = 1;
         tm.setOnTimeTick(() -> {
             timerLabel2.setText(tm.getFormattedTime());
         });
     }
 
+    // FXML fields for UI components (buttons, labels, text field, etc.)
+    // ..
     public Label timerLabel2;
     private KeyEvent event;
     public Button Back;
@@ -106,9 +116,10 @@ public class WordleController {
     public Label box53 = new Label();
     public Label box54 = new Label();
 
+
     /**
-     * Exits the program gracefully by calling System.exit(0).
-     * It terminates the Java Virtual Machine with a status code of 0, indicating a successful termination.
+     * Beendet das Programm ordnungsgemäß, indem System.exit(0) aufgerufen wird.
+     * Damit wird die Java Virtual Machine mit einem Statuscode von 0 beendet, was auf einen erfolgreichen Abschluss hinweist.
      */
     @FXML
     protected void quit() {
@@ -117,9 +128,9 @@ public class WordleController {
 
 
     /**
-     * Removes the last character from the text in the guess input field.
-     * This method is intended for handling the "Back" functionality.
-     * If the guess input field is empty or contains only one character, no action is taken.
+     * Entfernt das letzte Zeichen aus dem Textfeld der Benutzereingabe.
+     * Diese Methode ist für die Behandlung der "Back"-Funktionalität vorgesehen.
+     * Wenn das Eingabefeld leer ist, wird keine Aktion durchgeführt.
      */
     @FXML
     protected void setBack() {
@@ -130,6 +141,8 @@ public class WordleController {
 
         } catch (StringIndexOutOfBoundsException ignored) {
         }
+        // Ignoriert die Ausnahme, falls das Eingabefeld leer ist
+
     }
 
 
@@ -308,7 +321,8 @@ public class WordleController {
 
                 gameFinished(0);
 
-            } catch (NullPointerException ignored) {}
+            } catch (NullPointerException ignored) {
+            }
             // Ignoriert eine mögliche NullPointerException
 
         }
@@ -317,9 +331,10 @@ public class WordleController {
 
     /**
      * Aktualisiert die Darstellung der Buchstaben in der Zeile entsprechend den Ergebnissen der Wortüberprüfung.
+     *
      * @param anzeigeArray Ein Array, das die Anzeige für jeden Buchstaben im eingegebenen Wort angibt in Form aus 0, 1 oder 2 z.B -> FLUSS:  [0, 0, 0, 1, 2]   SOLUTION:DOSIS.
-     * @param userInput Das eingegebene Wort.
-     * @param row Ein Array von Labels, das die visuelle Darstellung der Buchstaben repräsentiert.
+     * @param userInput    Das eingegebene Wort.
+     * @param row          Ein Array von Labels, das die visuelle Darstellung der Buchstaben repräsentiert.
      * @see LetterManager#comparisonOfLetters(String, String)
      */
     public void colorBoxes(int[] anzeigeArray, String userInput, Label[] row) {
@@ -366,11 +381,9 @@ public class WordleController {
                 row[i].setStyle("-fx-background-color: #919191;");
 
                 // Überprüft den aktuellen Hintergrund des Buttons und aktualisiert ihn entsprechend
-                if (buttonMap.get(row[i].getText()).getStyle().equals("-fx-background-color: #31a127;"))
-                {
+                if (buttonMap.get(row[i].getText()).getStyle().equals("-fx-background-color: #31a127;")) {
                     // Nichts tun, wenn der Button bereits grün ist
-                } else if (buttonMap.get(row[i].getText()).getStyle().equals("-fx-background-color: #f0b63a;"))
-                {
+                } else if (buttonMap.get(row[i].getText()).getStyle().equals("-fx-background-color: #f0b63a;")) {
                     // Nichts tun, wenn der Button bereits gelb ist
                 } else {
                     // Setzt den Hintergrund des Buttons auf grau
@@ -471,7 +484,7 @@ public class WordleController {
      * Verarbeitet das eingegebene Wort und führt die entsprechenden Aktionen aus.
      *
      * @param userInput Das vom Benutzer eingegebene Wort.
-     * @param labelRow Ein Array von Labels, das die visuelle Darstellung der Buchstaben repräsentiert.
+     * @param labelRow  Ein Array von Labels, das die visuelle Darstellung der Buchstaben repräsentiert.
      * @see WordleController#wordAlreadyUsed()
      * @see WordleController#colorBoxes(int[], String, Label[])
      * @see WordleController#gameFinished(int)
@@ -511,7 +524,7 @@ public class WordleController {
      * Wechselt zum End Screen, wenn das Spiel abgeschlossen ist, und zeigt die entsprechende Nachricht an.
      *
      * @param event Das KeyEvent-Objekt, das den Zustandswechsel ausgelöst hat.
-     * @param b Der Status des Spielendes: 1 für gewonnen, 0 für verloren, -1 für Zeitablauf.
+     * @param b     Der Status des Spielendes: 1 für gewonnen, 0 für verloren, -1 für Zeitablauf.
      * @see ControllerResultState#updateTimerLabel(String)
      * @see ControllerResultState#setResultText(String)
      * @see WordleApplication
@@ -527,7 +540,7 @@ public class WordleController {
 
             // Setzt den Text der Labels basierend auf dem Spielstatus
             if (b == 1) {
-                resultState.setResultText("CONGRATULATION! YOU WON!");
+                resultState.setResultText("CONGRATULATION! YOU WON!"+ System.lineSeparator() + "THE SOLUTION WORD WAS: " + solutionWord);
             } else if (b == 0) {
                 resultState.setResultText("SORRY! YOU HAVE RUN OUT OF TRYS!" + System.lineSeparator() + "THE SOLUTION WORD WAS: " + solutionWord);
             } else if (b == -1) {
