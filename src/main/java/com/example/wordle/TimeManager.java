@@ -8,10 +8,8 @@ public class TimeManager {
 
     private int secondsRemaining;
     private Timer timer;
-
     private final AnimationTimer aniTime;
     private Runnable onTimeTick;
-
 
     // dem Konstruktor werden Parameter und Klassen-Instanzen übergeben
     public TimeManager() {
