@@ -313,7 +313,7 @@
                <Insets left="20.0" right="20.0" />
             </HBox.margin>
          </TextField>
-         <Button fx:id="quit" mnemonicParsing="false" onAction="#quit" text="Quit" visible="false" />
+         <Button fx:id="quit" mnemonicParsing="false" text="Quit" visible="false" />
       </children>
    </HBox>
    <HBox fx:id="LetterRow1" alignment="CENTER" prefHeight="30.0" prefWidth="200.0">
